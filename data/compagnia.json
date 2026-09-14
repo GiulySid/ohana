@@ -1,0 +1,70 @@
+{
+  "people": [
+    {
+      "id": "elena-martini",
+      "nome": "Elena Martini",
+      "ruoli": ["attore"],
+      "attivoDal": "2018",
+      "attivoAl": "",
+      "bio": "Soprano e attrice. In compagnia dalle origini, ama i ruoli che tengono insieme ironia e canto.",
+      "foto": "",
+      "fotoThumb": "",
+      "hidden": false
+    },
+    {
+      "id": "luca-bianchi",
+      "nome": "Luca Bianchi",
+      "ruoli": ["attore"],
+      "attivoDal": "2020",
+      "attivoAl": "",
+      "bio": "Voce e movimento. Arriva dal teatro di prosa e dal palco non se n’è più andato.",
+      "foto": "",
+      "fotoThumb": "",
+      "hidden": false
+    },
+    {
+      "id": "sofia-riva",
+      "nome": "Sofia Riva",
+      "ruoli": ["regista"],
+      "attivoDal": "2016",
+      "attivoAl": "",
+      "bio": "Regia e drammaturgia. Tiene insieme il cast come si tiene un ensemble: ascoltando.",
+      "foto": "",
+      "fotoThumb": "",
+      "hidden": false
+    },
+    {
+      "id": "marco-conti",
+      "nome": "Marco Conti",
+      "ruoli": ["tecnico"],
+      "attivoDal": "2019",
+      "attivoAl": "",
+      "bio": "Luci e suono. Se lo spot è nel posto giusto, è quasi sempre colpa sua.",
+      "foto": "",
+      "fotoThumb": "",
+      "hidden": false
+    },
+    {
+      "id": "chiara-leoni",
+      "nome": "Chiara Leoni",
+      "ruoli": ["collaboratore"],
+      "attivoDal": "2017",
+      "attivoAl": "2023",
+      "bio": "Costumi e organizzazione. Ha cucito più di un mondo in questo palco.",
+      "foto": "",
+      "fotoThumb": "",
+      "hidden": false
+    },
+    {
+      "id": "davide-serra",
+      "nome": "Davide Serra",
+      "ruoli": ["attore", "tecnico"],
+      "attivoDal": "2015",
+      "attivoAl": "2021",
+      "bio": "In scena e dietro le quinte. Un piede sul palco, l’altro al mixer.",
+      "foto": "",
+      "fotoThumb": "",
+      "hidden": false
+    }
+  ]
+}

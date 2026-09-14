@@ -1,0 +1,5 @@
+admin/credentials.php
+data/backups/*
+!data/backups/.gitkeep
+
+media/

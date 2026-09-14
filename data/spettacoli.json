@@ -1,0 +1,101 @@
+{
+  "shows": [
+    {
+      "id": "stelle-in-tasca",
+      "titolo": "Stelle in tasca",
+      "stagione": "2026/2027",
+      "anno": 2026,
+      "stato": "prossimo",
+      "sinossi": "Un musical originale sull’idea di casa: chi la cerca, chi la costruisce, chi la porta in tasca come una stella. Voci, coro e un palco che si accende a poco a poco.",
+      "locandina": "",
+      "locandinaThumb": "",
+      "trailerYoutube": "",
+      "repliche": [
+        {
+          "data": "2026-11-14",
+          "ora": "21:00",
+          "luogo": "Teatro",
+          "citta": "",
+          "biglietti": ""
+        }
+      ],
+      "cast": [
+        { "personId": "elena-martini", "ruoloInScena": "Lead" },
+        { "personId": "luca-bianchi", "ruoloInScena": "Lead" }
+      ],
+      "staff": [
+        { "personId": "sofia-riva", "credito": "Regia" },
+        { "personId": "marco-conti", "credito": "Luci e suono" }
+      ],
+      "gallery": [],
+      "hidden": false
+    },
+    {
+      "id": "cuori-in-prova",
+      "titolo": "Cuori in prova",
+      "stagione": "2024",
+      "anno": 2024,
+      "stato": "archivio",
+      "sinossi": "Una compagnia che prova un musical e, prova dopo prova, si accorge di stare raccontando sé stessa.",
+      "locandina": "",
+      "locandinaThumb": "",
+      "trailerYoutube": "",
+      "repliche": [
+        {
+          "data": "2024-05-18",
+          "ora": "21:00",
+          "luogo": "Teatro comunale",
+          "citta": "",
+          "biglietti": ""
+        },
+        {
+          "data": "2024-05-19",
+          "ora": "21:00",
+          "luogo": "Teatro comunale",
+          "citta": "",
+          "biglietti": ""
+        }
+      ],
+      "cast": [
+        { "personId": "elena-martini", "ruoloInScena": "Anna" },
+        { "personId": "luca-bianchi", "ruoloInScena": "Leo" }
+      ],
+      "staff": [
+        { "personId": "sofia-riva", "credito": "Regia" },
+        { "personId": "chiara-leoni", "credito": "Costumi" }
+      ],
+      "gallery": [],
+      "hidden": false
+    },
+    {
+      "id": "la-famiglia-che-canta",
+      "titolo": "La famiglia che canta",
+      "stagione": "2022",
+      "anno": 2022,
+      "stato": "archivio",
+      "sinossi": "Un inno alla voce condivisa. Coro, solisti e una storia che sta tutta nella parola ohana: famiglia.",
+      "locandina": "",
+      "locandinaThumb": "",
+      "trailerYoutube": "",
+      "repliche": [
+        {
+          "data": "2022-11-12",
+          "ora": "21:00",
+          "luogo": "Auditorium",
+          "citta": "",
+          "biglietti": ""
+        }
+      ],
+      "cast": [
+        { "personId": "davide-serra", "ruoloInScena": "Ensemble" },
+        { "personId": "elena-martini", "ruoloInScena": "Ensemble" }
+      ],
+      "staff": [
+        { "personId": "sofia-riva", "credito": "Regia" },
+        { "personId": "marco-conti", "credito": "Tecnica" }
+      ],
+      "gallery": [],
+      "hidden": false
+    }
+  ]
+}
