@@ -12,18 +12,18 @@ $alumniPeople = array_values(array_filter($people, static function ($person) {
 
 site_header("compagnia", "Compagnia", "Chi ha dato voce, corpo e luce a Ohana.");
 ?>
-<section class="compagnia-hero" data-compagnia-hero>
-  <div class="compagnia-hero__pin">
-    <div class="compagnia-hero__split">
-      <div class="compagnia-hero__half compagnia-hero__half--left">
-        <div class="compagnia-hero__text">
+<section class="split-hero" data-split-hero>
+  <div class="split-hero__pin">
+    <div class="split-hero__split">
+      <div class="split-hero__half split-hero__half--left">
+        <div class="split-hero__text">
           <p class="kicker">La famiglia</p>
           <h1>Compagnia</h1>
           <p>Attori, registi, tecnici e chi ha collaborato anche solo per una stagione. Il palco ricorda tutti.</p>
         </div>
       </div>
-      <div class="compagnia-hero__half compagnia-hero__half--right" aria-hidden="true">
-        <div class="compagnia-hero__text">
+      <div class="split-hero__half split-hero__half--right" aria-hidden="true">
+        <div class="split-hero__text">
           <p class="kicker">La famiglia</p>
           <h1>Compagnia</h1>
           <p>Attori, registi, tecnici e chi ha collaborato anche solo per una stagione. Il palco ricorda tutti.</p>
@@ -32,7 +32,7 @@ site_header("compagnia", "Compagnia", "Chi ha dato voce, corpo e luce a Ohana.")
     </div>
   </div>
 
-  <div class="compagnia-hero__cast">
+  <div class="split-hero__cast">
     <div class="filters" data-filter-group>
       <button class="filter is-on" type="button" data-filter="tutti">Tutti</button>
       <?php foreach (PERSON_ROLES as $key => $label) { ?>

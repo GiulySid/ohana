@@ -748,12 +748,12 @@ body[data-page="compagnia"] .filters {
   -webkit-backdrop-filter: blur(14px);
 }
 
-.compagnia-hero {
+.split-hero {
   --hero: 0;
   min-height: 220vh;
 }
 
-.compagnia-hero__pin {
+.split-hero__pin {
   position: sticky;
   top: var(--header);
   z-index: 2;
@@ -765,40 +765,40 @@ body[data-page="compagnia"] .filters {
   pointer-events: none;
 }
 
-.compagnia-hero__cast {
+.split-hero__cast {
   position: relative;
   z-index: 3;
 }
 
-.compagnia-hero__split {
+.split-hero__split {
   position: relative;
   width: min(54rem, 100%);
 }
 
-.compagnia-hero__half {
+.split-hero__half {
   width: 100%;
   backface-visibility: hidden;
 }
 
-.compagnia-hero__half--left {
+.split-hero__half--left {
   clip-path: inset(0 calc(50% - 3px) 0 0);
   transform: translate3d(calc(var(--hero) * -110vw), 0, 0);
 }
 
-.compagnia-hero__half--right {
+.split-hero__half--right {
   position: absolute;
   inset: 0;
   clip-path: inset(0 0 0 calc(50% - 3px));
   transform: translate3d(calc(var(--hero) * 110vw), 0, 0);
 }
 
-.compagnia-hero__text {
+.split-hero__text {
   padding: 0.2rem 0;
   color: var(--fg);
   text-align: center;
 }
 
-.compagnia-hero__text h1 {
+.split-hero__text h1 {
   font-family: var(--display);
   font-weight: 600;
   letter-spacing: -0.03em;
@@ -807,7 +807,7 @@ body[data-page="compagnia"] .filters {
   margin: 0.15rem 0 0.85rem;
 }
 
-.compagnia-hero__text p:last-child {
+.split-hero__text p:last-child {
   margin: 0;
   color: var(--muted);
   font-size: clamp(1rem, 2vw, 1.2rem);
@@ -1168,31 +1168,67 @@ body[data-page="compagnia"] .people-grid {
   height: 1px;
 }
 
-.contact-stage {
-  min-height: calc(100vh - var(--header));
+.contact-head {
+  padding: clamp(3rem, 7vw, 5.5rem) var(--gutter) 2.2rem;
+  text-align: center;
+}
+
+.contact-head h1 {
+  font-family: var(--display);
+  font-weight: 600;
+  letter-spacing: -0.03em;
+  line-height: 1;
+  font-size: clamp(2.6rem, 8vw, 5.2rem);
+  margin: 0.15rem 0 0.85rem;
+}
+
+.contact-head p:last-child {
+  margin: 0 auto;
+  max-width: 36rem;
+  color: var(--muted);
+  font-size: clamp(1rem, 2vw, 1.2rem);
+  line-height: 1.45;
+}
+
+.contact-board {
   display: grid;
-  grid-template-columns: minmax(0, 1.05fr) minmax(18rem, 0.9fr);
+  grid-template-columns: minmax(16rem, 0.8fr) minmax(0, 1.2fr);
   gap: clamp(2rem, 5vw, 4.5rem);
   align-items: start;
-  padding: clamp(2.5rem, 7vw, 5rem) var(--gutter) 5rem;
+  width: min(72rem, calc(100% - 2 * var(--gutter)));
+  margin: 0 auto 5rem;
 }
 
-.contact-stage h1 {
-  font-family: var(--display);
-  font-size: clamp(2.6rem, 9vw, 5.6rem);
-  font-weight: 600;
-  line-height: 1.05;
-}
-
-.contact-list {
-  margin-top: 2rem;
+.contact-aside {
   display: grid;
-  gap: 0.85rem;
-  font-size: 1.15rem;
+  justify-items: end;
+  align-content: start;
+  gap: 0.9rem;
+  padding-top: 0.4rem;
+  text-align: right;
+  font-size: clamp(1.05rem, 2vw, 1.35rem);
 }
 
-.contact-list a:hover {
+.contact-aside a:hover {
   color: var(--red);
+}
+
+.contact-reveal {
+  opacity: 0;
+  transition: opacity 0.8s ease, transform 1.05s cubic-bezier(0.22, 1.35, 0.36, 1);
+}
+
+.contact-reveal--form {
+  transform: translate3d(18vw, 0, 0);
+}
+
+.contact-reveal--links {
+  transform: translate3d(-18vw, 0, 0);
+}
+
+.contact-reveal.is-in {
+  opacity: 1;
+  transform: none;
 }
 
 .contact-form {
@@ -1377,20 +1413,25 @@ body[data-page="compagnia"] .people-grid {
     height: 200vh;
   }
 
-  .compagnia-hero__pin {
+  .split-hero__pin {
     min-height: 62vh;
     padding-top: 2.4rem;
   }
 
-  .compagnia-hero__text h1 {
+  .split-hero__text h1,
+  .contact-head h1 {
     font-size: clamp(2.2rem, 12vw, 3.2rem);
   }
 
   .about-grid,
   .detail-grid,
   .show-card--hero,
-  .contact-stage {
+  .contact-board {
     grid-template-columns: 1fr;
+  }
+
+  .contact-form {
+    order: -1;
   }
 
   .about-photo img {
@@ -1473,12 +1514,12 @@ body[data-page="compagnia"] .people-grid {
     transform: none;
   }
 
-  .compagnia-hero {
+  .split-hero {
     height: auto;
     min-height: 0;
   }
 
-  .compagnia-hero__pin {
+  .split-hero__pin {
     position: relative;
     top: auto;
     height: auto;
@@ -1486,14 +1527,15 @@ body[data-page="compagnia"] .people-grid {
     background: none;
   }
 
-  .compagnia-hero__half--left,
-  .compagnia-hero__half--right,
+  .split-hero__half--left,
+  .split-hero__half--right,
   body[data-page="compagnia"] .filters {
     transform: none;
     opacity: 1;
   }
 
-  .media-shot img {
+  .media-shot img,
+  .contact-reveal {
     opacity: 1;
     transform: none;
   }

@@ -51,57 +51,47 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
 site_header("contatti", "Contatti", "Scrivi a Ohana Musical Company.");
 ?>
-<section class="contact-stage">
-  <div class="contact-copy">
-    <p class="kicker">Un saluto</p>
-    <h1>Restiamo<br>in contatto</h1>
-    <div class="contact-list">
-      <?php if (!empty($site["email"])) { ?>
-        <a href="mailto:<?= data_h($site["email"]) ?>"><?= data_h($site["email"]) ?></a>
-      <?php } ?>
-      <?php if (!empty($site["telefono"])) { ?>
-        <a href="tel:<?= data_h(preg_replace("/\s+/", "", $site["telefono"])) ?>"><?= data_h($site["telefono"]) ?></a>
-      <?php } ?>
-      <?php if (!empty($site["instagram"])) { ?>
-        <a href="<?= data_h($site["instagram"]) ?>" target="_blank" rel="noopener noreferrer">Instagram</a>
-      <?php } ?>
-      <?php if (!empty($site["facebook"])) { ?>
-        <a href="<?= data_h($site["facebook"]) ?>" target="_blank" rel="noopener noreferrer">Facebook</a>
-      <?php } ?>
-      <?php if (!empty($site["indirizzo"])) { ?>
-        <p><?= data_h($site["indirizzo"]) ?></p>
-      <?php } ?>
-      <?php if (!empty($site["orariProve"])) { ?>
-        <p><?= data_h($site["orariProve"]) ?></p>
-      <?php } ?>
-    </div>
-  </div>
+<header class="contact-head">
+  <p class="kicker">Un saluto</p>
+  <h1>Restiamo in contatto</h1>
+  <p>Scrivici dal form, oppure trovaci direttamente su email e Instagram.</p>
+</header>
 
-  <form class="contact-form" method="post" novalidate>
-    <p class="kicker">Inquire</p>
-    <?php if ($sent) { ?>
-      <p class="form-note form-note--ok">Grazie. Ti rispondiamo appena possibile.</p>
-    <?php } ?>
-    <?php if ($error !== "") { ?>
-      <p class="form-note form-note--err"><?= data_h($error) ?></p>
-    <?php } ?>
-    <label class="hp" for="website">Sito
-      <input type="text" id="website" name="website" tabindex="-1" autocomplete="off">
-    </label>
-    <label>
-      <span>Nome</span>
-      <input type="text" name="nome" required maxlength="120" value="<?= data_h($values["nome"]) ?>">
-    </label>
-    <label>
-      <span>Email</span>
-      <input type="email" name="email" required maxlength="160" value="<?= data_h($values["email"]) ?>">
-    </label>
-    <label>
-      <span>Messaggio</span>
-      <textarea name="messaggio" required maxlength="4000"><?= data_h($values["messaggio"]) ?></textarea>
-    </label>
-    <button class="btn" type="submit">Invia</button>
-  </form>
-</section>
+<div class="contact-board">
+  <aside class="contact-aside contact-reveal contact-reveal--links" data-contact-reveal>
+        <?php if (!empty($site["email"])) { ?>
+          <a href="mailto:<?= data_h($site["email"]) ?>"><?= data_h($site["email"]) ?></a>
+        <?php } ?>
+        <?php if (!empty($site["instagram"])) { ?>
+          <a href="<?= data_h($site["instagram"]) ?>" target="_blank" rel="noopener noreferrer">Instagram</a>
+        <?php } ?>
+      </aside>
+
+      <form class="contact-form contact-reveal contact-reveal--form" method="post" novalidate data-contact-reveal>
+        <p class="kicker">Inquire</p>
+        <?php if ($sent) { ?>
+          <p class="form-note form-note--ok">Grazie. Ti rispondiamo appena possibile.</p>
+        <?php } ?>
+        <?php if ($error !== "") { ?>
+          <p class="form-note form-note--err"><?= data_h($error) ?></p>
+        <?php } ?>
+        <label class="hp" for="website">Sito
+          <input type="text" id="website" name="website" tabindex="-1" autocomplete="off">
+        </label>
+        <label>
+          <span>Nome</span>
+          <input type="text" name="nome" required maxlength="120" value="<?= data_h($values["nome"]) ?>">
+        </label>
+        <label>
+          <span>Email</span>
+          <input type="email" name="email" required maxlength="160" value="<?= data_h($values["email"]) ?>">
+        </label>
+        <label>
+          <span>Messaggio</span>
+          <textarea name="messaggio" required maxlength="4000"><?= data_h($values["messaggio"]) ?></textarea>
+        </label>
+        <button class="btn" type="submit">Invia</button>
+      </form>
+    </div>
 <?php
 site_footer();

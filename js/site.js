@@ -5,11 +5,27 @@
   const toggle = document.querySelector(".nav-toggle");
   const nav = document.querySelector("#site-nav");
 
+  const unveilWaiters = [];
+
+  function whenUnveiled(fn) {
+    if (reduce || !document.documentElement.classList.contains("is-booting")) {
+      fn();
+      return;
+    }
+    unveilWaiters.push(fn);
+  }
+
+  function flushUnveilWaiters() {
+    while (unveilWaiters.length) unveilWaiters.shift()();
+  }
+
   function openVeil() {
     document.body.classList.remove("is-leaving");
     window.setTimeout(() => {
       document.documentElement.classList.remove("is-booting");
       document.body.classList.add("is-ready");
+      // Match .page-veil visibility/dim fade (0.5s) before page motion starts.
+      window.setTimeout(flushUnveilWaiters, reduce ? 0 : 520);
     }, reduce ? 0 : 500);
   }
 
@@ -215,8 +231,8 @@
     window.addEventListener("resize", onScroll);
   }
 
-  function initCompagniaHero() {
-    const stage = document.querySelector("[data-compagnia-hero]");
+  function initSplitHero() {
+    const stage = document.querySelector("[data-split-hero]");
     if (!stage) return;
 
     function clamp(value, min, max) {
@@ -231,7 +247,6 @@
       const p = clamp((t - 0.06) / 0.94, 0, 1);
       const open = easeInOutSine(p);
       stage.style.setProperty("--hero", open.toFixed(4));
-      document.body.style.setProperty("--compagnia-hero", open.toFixed(4));
     }
 
     if (reduce) {
@@ -371,8 +386,42 @@
     loader.observe(sentinel);
   }
 
+  function initContactReveal() {
+    const items = [...document.querySelectorAll("[data-contact-reveal]")];
+    if (!items.length) return;
+
+    if (reduce) {
+      items.forEach((item) => item.classList.add("is-in"));
+      return;
+    }
+
+    function show(item, delay) {
+      if (item.classList.contains("is-in")) return;
+      window.setTimeout(() => item.classList.add("is-in"), delay);
+    }
+
+    function check() {
+      items.forEach((item) => {
+        const rect = item.getBoundingClientRect();
+        const visible = rect.top < window.innerHeight * 0.9 && rect.bottom > 64;
+        if (!visible) return;
+        const delay = item.classList.contains("contact-reveal--form") ? 180 : 40;
+        show(item, delay);
+      });
+    }
+
+    whenUnveiled(() => {
+      window.requestAnimationFrame(() => {
+        window.requestAnimationFrame(check);
+      });
+      window.addEventListener("scroll", check, { passive: true });
+      window.addEventListener("resize", check);
+    });
+  }
+
   initHomeStage();
-  initCompagniaHero();
+  initSplitHero();
   initAboutSlide();
   initMediaStream();
+  initContactReveal();
 })();
