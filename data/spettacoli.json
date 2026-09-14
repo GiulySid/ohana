@@ -19,6 +19,34 @@
                 {
                     "personId": "luca-bianchi",
                     "ruoloInScena": "Lead"
+                },
+                {
+                    "personId": "sofia-riva",
+                    "ruoloInScena": ""
+                },
+                {
+                    "personId": "anna-ferri",
+                    "ruoloInScena": ""
+                },
+                {
+                    "personId": "tommaso-ricci",
+                    "ruoloInScena": ""
+                },
+                {
+                    "personId": "valentina-fontana",
+                    "ruoloInScena": ""
+                },
+                {
+                    "personId": "federico-bruno",
+                    "ruoloInScena": ""
+                },
+                {
+                    "personId": "anna-ferri",
+                    "ruoloInScena": ""
+                },
+                {
+                    "personId": "sofia-riva",
+                    "ruoloInScena": ""
                 }
             ],
             "staff": [

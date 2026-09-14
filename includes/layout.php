@@ -196,7 +196,11 @@ function site_curtain_src() {
 function site_show_card($show, $compact = false) {
     $poster = data_asset($show["locandinaThumb"] ?? "") ?: data_asset($show["locandina"] ?? "");
     $count = count($show["repliche"] ?? []);
-    $dates = $count === 1 ? "1 data" : ($count . " date");
+    if (($show["stato"] ?? "") === "prossimo" && $count === 0) {
+        $dates = trim((string) ($show["stagione"] ?? "")) ?: "Prossimamente";
+    } else {
+        $dates = $count === 1 ? "1 data" : ($count . " date");
+    }
     $guest = site_show_guest($show);
     ?>
     <a class="show-card<?= $compact ? " show-card--compact" : "" ?><?= $guest !== "" ? " show-card--guest" : "" ?>" href="spettacolo?id=<?= data_h($show["id"]) ?>" data-nav>

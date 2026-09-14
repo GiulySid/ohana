@@ -186,9 +186,6 @@ function data_upcoming_show() {
 function data_archive_by_year() {
     $groups = [];
     foreach (data_shows() as $show) {
-        if (($show["stato"] ?? "archivio") === "prossimo") {
-            continue;
-        }
         $label = trim((string) ($show["stagione"] ?? ""));
         if ($label === "") {
             $label = (string) ($show["anno"] ?? "");
