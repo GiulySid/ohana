@@ -4,10 +4,10 @@ require_once __DIR__ . DIRECTORY_SEPARATOR . "data.php";
 
 function site_nav_items() {
     return [
-        "compagnia" => ["label" => "Compagnia", "href" => "compagnia.php"],
-        "archivio" => ["label" => "Archivio", "href" => "archivio.php"],
-        "media" => ["label" => "Media", "href" => "media.php"],
-        "contatti" => ["label" => "Contatti", "href" => "contatti.php"],
+        "compagnia" => ["label" => "Compagnia", "href" => "compagnia"],
+        "archivio" => ["label" => "Archivio", "href" => "archivio"],
+        "media" => ["label" => "Media", "href" => "galleria"],
+        "contatti" => ["label" => "Contatti", "href" => "contatti"],
     ];
 }
 
@@ -48,7 +48,7 @@ function site_header($current, $title, $description = "") {
   </div>
 
   <header class="site-header">
-    <a class="brand" href="index.php" data-nav>
+    <a class="brand" href="./" data-nav>
       <img src="logo.jpg" alt="<?= data_h($name) ?>" width="64" height="64">
       <span><?= data_h($name) ?></span>
     </a>
@@ -102,7 +102,7 @@ function site_person_card($person) {
     $active = data_person_is_active($person);
     $roles = implode(",", $person["ruoli"] ?? []);
     ?>
-    <a class="person-card" href="persona.php?id=<?= data_h($person["id"]) ?>" data-nav data-roles="<?= data_h($roles) ?>" data-active="<?= $active ? "1" : "0" ?>">
+    <a class="person-card" href="persona?id=<?= data_h($person["id"]) ?>" data-nav data-roles="<?= data_h($roles) ?>" data-active="<?= $active ? "1" : "0" ?>">
       <div class="person-card__photo">
         <?php if ($thumb) { ?>
           <img src="<?= data_h($thumb) ?>" alt="" loading="lazy">
@@ -188,7 +188,7 @@ function site_show_card($show, $compact = false) {
     $count = count($show["repliche"] ?? []);
     $dates = $count === 1 ? "1 data" : ($count . " date");
     ?>
-    <a class="show-card<?= $compact ? " show-card--compact" : "" ?>" href="spettacolo.php?id=<?= data_h($show["id"]) ?>" data-nav>
+    <a class="show-card<?= $compact ? " show-card--compact" : "" ?>" href="spettacolo?id=<?= data_h($show["id"]) ?>" data-nav>
       <div class="show-card__poster">
         <?php if ($poster) { ?>
           <img src="<?= data_h($poster) ?>" alt="" loading="lazy">

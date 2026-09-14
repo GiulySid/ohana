@@ -1,5 +1,8 @@
 <?php
 
+require_once __DIR__ . DIRECTORY_SEPARATOR . "includes" . DIRECTORY_SEPARATOR . "dispatch.php";
+site_dispatch();
+
 require __DIR__ . DIRECTORY_SEPARATOR . "includes" . DIRECTORY_SEPARATOR . "layout.php";
 
 $site = data_site();
@@ -64,7 +67,7 @@ site_header("home", $name, $site["tagline"] ?? "");
         <?php } elseif (!empty($upcoming["stagione"])) { ?>
           <p><?= data_h($upcoming["stagione"]) ?></p>
         <?php } ?>
-        <a class="btn" href="spettacolo.php?id=<?= data_h($upcoming["id"]) ?>" data-nav>Scopri lo spettacolo</a>
+        <a class="btn" href="spettacolo?id=<?= data_h($upcoming["id"]) ?>" data-nav>Scopri lo spettacolo</a>
       </article>
     <?php } ?> -->
 
@@ -74,7 +77,7 @@ site_header("home", $name, $site["tagline"] ?? "");
           <div>
             <p class="kicker">Chi siamo</p>
             <p class="lead"><?= data_h($site["chiSiamo"]) ?></p>
-            <a class="btn" href="compagnia.php" data-nav>La compagnia</a>
+            <a class="btn" href="compagnia" data-nav>La compagnia</a>
           </div>
           <?php if ($aboutPhoto) { ?>
             <figure class="about-photo">

@@ -7,7 +7,7 @@ $show = $id !== "" ? data_show($id) : null;
 if (!$show) {
     http_response_code(404);
     site_header("archivio", "Non trovato");
-    echo '<header class="page-head"><h1>Fuori cartellone</h1><p>Questo spettacolo non è in archivio.</p><a class="btn" href="archivio.php" data-nav>Torna all’archivio</a></header>';
+    echo '<header class="page-head"><h1>Fuori cartellone</h1><p>Questo spettacolo non è in archivio.</p><a class="btn" href="archivio" data-nav>Torna all’archivio</a></header>';
     site_footer();
     exit;
 }

@@ -215,6 +215,56 @@
     window.addEventListener("resize", onScroll);
   }
 
+  function initCompagniaHero() {
+    const stage = document.querySelector("[data-compagnia-hero]");
+    if (!stage) return;
+
+    function clamp(value, min, max) {
+      return Math.min(max, Math.max(min, value));
+    }
+
+    function easeInOutSine(t) {
+      return -(Math.cos(Math.PI * t) - 1) / 2;
+    }
+
+    function setHero(t) {
+      const p = clamp((t - 0.06) / 0.94, 0, 1);
+      const open = easeInOutSine(p);
+      stage.style.setProperty("--hero", open.toFixed(4));
+      document.body.style.setProperty("--compagnia-hero", open.toFixed(4));
+    }
+
+    if (reduce) {
+      setHero(0);
+      return;
+    }
+
+    function update() {
+      const available = Math.max(0, document.documentElement.scrollHeight - window.innerHeight);
+      if (available < 4) {
+        setHero(0);
+        return;
+      }
+      const range = Math.max(1, Math.min(window.innerHeight * 1.15, available));
+      const t = clamp(window.scrollY / range, 0, 1);
+      setHero(t);
+    }
+
+    let ticking = false;
+    function onScroll() {
+      if (ticking) return;
+      ticking = true;
+      requestAnimationFrame(() => {
+        update();
+        ticking = false;
+      });
+    }
+
+    update();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    window.addEventListener("resize", onScroll);
+  }
+
   function initAboutSlide() {
     const panel = document.querySelector("[data-about]");
     if (!panel) return;
@@ -222,9 +272,10 @@
     function update() {
       const rect = panel.getBoundingClientRect();
       const start = window.innerHeight * 0.95;
-      const end = window.innerHeight * 0.4;
-      const t = (start - rect.top) / Math.max(1, start - end);
-      panel.style.setProperty("--about", Math.min(1, Math.max(0, t)).toFixed(3));
+      const end = window.innerHeight * 0.38;
+      const t = Math.min(1, Math.max(0, (start - rect.top) / Math.max(1, start - end)));
+      panel.style.setProperty("--about", t.toFixed(3));
+      panel.classList.toggle("is-landed", t >= 0.98);
     }
 
     if (reduce) {
@@ -321,6 +372,7 @@
   }
 
   initHomeStage();
+  initCompagniaHero();
   initAboutSlide();
   initMediaStream();
 })();

@@ -252,7 +252,7 @@ function admin_layout($title, $body, $options = []) {
         echo '<a class="admin-bar__mark" href="index.php">Ohana<span>admin</span></a>';
         echo '<nav class="admin-bar__nav">';
         echo '<a href="password.php">Password</a>';
-        echo '<a href="../index.php" target="_blank" rel="noopener">Vedi sito</a>';
+        echo '<a href="../" target="_blank" rel="noopener">Vedi sito</a>';
         echo '<form method="post" action="logout.php">' . admin_csrf_field() . '<button type="submit">Esci</button></form>';
         echo "</nav></header>";
     }

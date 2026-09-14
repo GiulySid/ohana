@@ -65,6 +65,116 @@
       "foto": "",
       "fotoThumb": "",
       "hidden": false
+    },
+    {
+      "id": "anna-ferri",
+      "nome": "Anna Ferri",
+      "ruoli": ["attore"],
+      "attivoDal": "2021",
+      "attivoAl": "",
+      "bio": "Placeholder compagnia.",
+      "foto": "",
+      "fotoThumb": "",
+      "hidden": false
+    },
+    {
+      "id": "paolo-gallo",
+      "nome": "Paolo Gallo",
+      "ruoli": ["attore"],
+      "attivoDal": "2019",
+      "attivoAl": "",
+      "bio": "Placeholder compagnia.",
+      "foto": "",
+      "fotoThumb": "",
+      "hidden": false
+    },
+    {
+      "id": "giulia-neri",
+      "nome": "Giulia Neri",
+      "ruoli": ["regista"],
+      "attivoDal": "2022",
+      "attivoAl": "",
+      "bio": "Placeholder compagnia.",
+      "foto": "",
+      "fotoThumb": "",
+      "hidden": false
+    },
+    {
+      "id": "andrea-costa",
+      "nome": "Andrea Costa",
+      "ruoli": ["tecnico"],
+      "attivoDal": "2020",
+      "attivoAl": "",
+      "bio": "Placeholder compagnia.",
+      "foto": "",
+      "fotoThumb": "",
+      "hidden": false
+    },
+    {
+      "id": "marta-villa",
+      "nome": "Marta Villa",
+      "ruoli": ["attore"],
+      "attivoDal": "2018",
+      "attivoAl": "",
+      "bio": "Placeholder compagnia.",
+      "foto": "",
+      "fotoThumb": "",
+      "hidden": false
+    },
+    {
+      "id": "federico-bruno",
+      "nome": "Federico Bruno",
+      "ruoli": ["tecnico"],
+      "attivoDal": "2023",
+      "attivoAl": "",
+      "bio": "Placeholder compagnia.",
+      "foto": "",
+      "fotoThumb": "",
+      "hidden": false
+    },
+    {
+      "id": "irene-sarti",
+      "nome": "Irene Sarti",
+      "ruoli": ["collaboratore"],
+      "attivoDal": "2021",
+      "attivoAl": "",
+      "bio": "Placeholder compagnia.",
+      "foto": "",
+      "fotoThumb": "",
+      "hidden": false
+    },
+    {
+      "id": "tommaso-ricci",
+      "nome": "Tommaso Ricci",
+      "ruoli": ["attore"],
+      "attivoDal": "2017",
+      "attivoAl": "",
+      "bio": "Placeholder compagnia.",
+      "foto": "",
+      "fotoThumb": "",
+      "hidden": false
+    },
+    {
+      "id": "valentina-fontana",
+      "nome": "Valentina Fontana",
+      "ruoli": ["attore"],
+      "attivoDal": "2016",
+      "attivoAl": "2022",
+      "bio": "Placeholder compagnia.",
+      "foto": "",
+      "fotoThumb": "",
+      "hidden": false
+    },
+    {
+      "id": "nicola-greco",
+      "nome": "Nicola Greco",
+      "ruoli": ["tecnico"],
+      "attivoDal": "2014",
+      "attivoAl": "2020",
+      "bio": "Placeholder compagnia.",
+      "foto": "",
+      "fotoThumb": "",
+      "hidden": false
     }
   ]
 }

@@ -7,7 +7,7 @@ $person = $id !== "" ? data_person($id) : null;
 if (!$person) {
     http_response_code(404);
     site_header("compagnia", "Non trovato");
-    echo '<header class="page-head"><h1>Non in scena</h1><p>Questa persona non è in compagnia, o la pagina non esiste.</p><a class="btn" href="compagnia.php" data-nav>Torna alla compagnia</a></header>';
+    echo '<header class="page-head"><h1>Non in scena</h1><p>Questa persona non è in compagnia, o la pagina non esiste.</p><a class="btn" href="compagnia" data-nav>Torna alla compagnia</a></header>';
     site_footer();
     exit;
 }
@@ -49,7 +49,7 @@ site_header("compagnia", $person["nome"], $person["bio"] ?: $person["nome"]);
         <?php foreach ($cv as $item) {
             $show = $item["show"];
             ?>
-          <a href="spettacolo.php?id=<?= data_h($show["id"]) ?>" data-nav>
+          <a href="spettacolo?id=<?= data_h($show["id"]) ?>" data-nav>
             <div>
               <h3><?= data_h($show["titolo"]) ?></h3>
               <p class="muted"><?= data_h($show["stagione"] ?: (string) $show["anno"]) ?></p>

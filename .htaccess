@@ -1,7 +1,20 @@
-Options -Indexes
+Options -Indexes -MultiViews
 DirectoryIndex index.php
 AddDefaultCharset UTF-8
 
 <IfModule mod_rewrite.c>
   RewriteEngine On
+
+  # Public pages only: /compagnia.php → /compagnia
+  RewriteCond %{THE_REQUEST} \s[\S]*index\.php[\s?] [NC]
+  RewriteRule ^index\.php$ ./ [R=301,L]
+  RewriteCond %{THE_REQUEST} \s[\S]*media\.php[\s?] [NC]
+  RewriteRule ^media\.php$ galleria [R=301,L]
+  RewriteCond %{THE_REQUEST} \s[\S]*?([^/\s]+)\.php[\s?] [NC]
+  RewriteCond %{REQUEST_URI} !/admin/
+  RewriteRule ^([^/]+)\.php$ $1 [R=301,L]
+
+  # /compagnia → compagnia.php (even if a folder with the same name exists, e.g. /media)
+  RewriteCond %{REQUEST_FILENAME}.php -f
+  RewriteRule ^([^/]+)/?$ $1.php [L]
 </IfModule>
