@@ -1,101 +1,80 @@
 {
-  "shows": [
-    {
-      "id": "stelle-in-tasca",
-      "titolo": "Stelle in tasca",
-      "stagione": "2026/2027",
-      "anno": 2026,
-      "stato": "prossimo",
-      "sinossi": "Un musical originale sull’idea di casa: chi la cerca, chi la costruisce, chi la porta in tasca come una stella. Voci, coro e un palco che si accende a poco a poco.",
-      "locandina": "",
-      "locandinaThumb": "",
-      "trailerYoutube": "",
-      "repliche": [
+    "shows": [
         {
-          "data": "2026-11-14",
-          "ora": "21:00",
-          "luogo": "Teatro",
-          "citta": "",
-          "biglietti": ""
-        }
-      ],
-      "cast": [
-        { "personId": "elena-martini", "ruoloInScena": "Lead" },
-        { "personId": "luca-bianchi", "ruoloInScena": "Lead" }
-      ],
-      "staff": [
-        { "personId": "sofia-riva", "credito": "Regia" },
-        { "personId": "marco-conti", "credito": "Luci e suono" }
-      ],
-      "gallery": [],
-      "hidden": false
-    },
-    {
-      "id": "cuori-in-prova",
-      "titolo": "Cuori in prova",
-      "stagione": "2024",
-      "anno": 2024,
-      "stato": "archivio",
-      "sinossi": "Una compagnia che prova un musical e, prova dopo prova, si accorge di stare raccontando sé stessa.",
-      "locandina": "",
-      "locandinaThumb": "",
-      "trailerYoutube": "",
-      "repliche": [
-        {
-          "data": "2024-05-18",
-          "ora": "21:00",
-          "luogo": "Teatro comunale",
-          "citta": "",
-          "biglietti": ""
+            "id": "stelle-in-tasca",
+            "titolo": "SHREK - Il Musical",
+            "stagione": "2026/2027",
+            "anno": 2027,
+            "stato": "prossimo",
+            "sinossi": "Un’avventura teatrale piena di ironia sta per prendere vita.\r\n\r\nPreparati a rivivere la magia del mondo di Shrek come non l’hai mai visto prima.\r\n\r\nIl debutto ufficiale è fissato per il 2027.\r\nSeguici per saperne di più!",
+            "locandina": "media/spettacoli/stelle-in-tasca/stelle-in-tasca-locandina.webp",
+            "locandinaThumb": "media/spettacoli/stelle-in-tasca/thumbs/stelle-in-tasca-locandina.webp",
+            "trailerYoutube": "",
+            "repliche": [],
+            "cast": [
+                {
+                    "personId": "elena-martini",
+                    "ruoloInScena": "Lead"
+                },
+                {
+                    "personId": "luca-bianchi",
+                    "ruoloInScena": "Lead"
+                }
+            ],
+            "staff": [
+                {
+                    "personId": "sofia-riva",
+                    "credito": "Regia"
+                },
+                {
+                    "personId": "marco-conti",
+                    "credito": "Luci e suono"
+                }
+            ],
+            "gallery": [],
+            "hidden": false
         },
         {
-          "data": "2024-05-19",
-          "ora": "21:00",
-          "luogo": "Teatro comunale",
-          "citta": "",
-          "biglietti": ""
+            "id": "la-famiglia-che-canta",
+            "titolo": "The Greatest Show",
+            "stagione": "2025/2026",
+            "anno": 2025,
+            "stato": "archivio",
+            "sinossi": "Il musical The Greatest Show ha acceso il nostro palco tra energia, coreografie e applausi a scena aperta.\r\nGrazie a Ohana Musical Company e a tutti voi!",
+            "locandina": "media/spettacoli/la-famiglia-che-canta/la-famiglia-che-canta-locandina.webp",
+            "locandinaThumb": "media/spettacoli/la-famiglia-che-canta/thumbs/la-famiglia-che-canta-locandina.webp",
+            "trailerYoutube": "",
+            "repliche": [
+                {
+                    "data": "2022-11-12",
+                    "ora": "21:00",
+                    "luogo": "Auditorium",
+                    "citta": "",
+                    "biglietti": ""
+                }
+            ],
+            "cast": [
+                {
+                    "personId": "davide-serra",
+                    "ruoloInScena": "Ensemble"
+                },
+                {
+                    "personId": "elena-martini",
+                    "ruoloInScena": "Ensemble"
+                }
+            ],
+            "staff": [
+                {
+                    "personId": "sofia-riva",
+                    "credito": "Regia"
+                },
+                {
+                    "personId": "marco-conti",
+                    "credito": "Tecnica"
+                }
+            ],
+            "gallery": [],
+            "hidden": false
         }
-      ],
-      "cast": [
-        { "personId": "elena-martini", "ruoloInScena": "Anna" },
-        { "personId": "luca-bianchi", "ruoloInScena": "Leo" }
-      ],
-      "staff": [
-        { "personId": "sofia-riva", "credito": "Regia" },
-        { "personId": "chiara-leoni", "credito": "Costumi" }
-      ],
-      "gallery": [],
-      "hidden": false
-    },
-    {
-      "id": "la-famiglia-che-canta",
-      "titolo": "La famiglia che canta",
-      "stagione": "2022",
-      "anno": 2022,
-      "stato": "archivio",
-      "sinossi": "Un inno alla voce condivisa. Coro, solisti e una storia che sta tutta nella parola ohana: famiglia.",
-      "locandina": "",
-      "locandinaThumb": "",
-      "trailerYoutube": "",
-      "repliche": [
-        {
-          "data": "2022-11-12",
-          "ora": "21:00",
-          "luogo": "Auditorium",
-          "citta": "",
-          "biglietti": ""
-        }
-      ],
-      "cast": [
-        { "personId": "davide-serra", "ruoloInScena": "Ensemble" },
-        { "personId": "elena-martini", "ruoloInScena": "Ensemble" }
-      ],
-      "staff": [
-        { "personId": "sofia-riva", "credito": "Regia" },
-        { "personId": "marco-conti", "credito": "Tecnica" }
-      ],
-      "gallery": [],
-      "hidden": false
-    }
-  ]
+    ]
 }

@@ -15,8 +15,12 @@ if (isset($pages[$page])) {
     return true;
 }
 
+if (site_serve_admin($page)) {
+    return true;
+}
+
 $file = __DIR__ . str_replace("/", DIRECTORY_SEPARATOR, $path);
-if ($path !== "/" && (is_file($file) || is_dir($file))) {
+if ($path !== "/" && is_file($file)) {
     return false;
 }
 

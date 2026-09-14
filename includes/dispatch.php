@@ -20,10 +20,50 @@ function site_request_page() {
     return $page;
 }
 
+function site_is_admin_request($page) {
+    return $page === "admin" || str_starts_with((string) $page, "admin/");
+}
+
+function site_serve_admin($page) {
+    if (!site_is_admin_request($page)) {
+        return false;
+    }
+
+    $uri = parse_url($_SERVER["REQUEST_URI"] ?? "/", PHP_URL_PATH) ?: "/";
+    if ($page === "admin" && !str_ends_with($uri, "/") && !str_ends_with($uri, ".php")) {
+        $query = parse_url($_SERVER["REQUEST_URI"] ?? "", PHP_URL_QUERY);
+        header("Location: " . $uri . "/" . ($query ? "?" . $query : ""), true, 302);
+        return true;
+    }
+
+    $root = dirname(__DIR__) . DIRECTORY_SEPARATOR . "admin";
+    $relative = $page === "admin" ? "index" : substr((string) $page, 6);
+    if ($relative === "" || str_contains($relative, "..")) {
+        $relative = "index";
+    }
+
+    $file = $root . DIRECTORY_SEPARATOR . str_replace("/", DIRECTORY_SEPARATOR, $relative);
+    if (!str_ends_with($file, ".php")) {
+        $file .= ".php";
+    }
+
+    $base = basename($file);
+    if ($base === "credentials.php" || !is_file($file)) {
+        return false;
+    }
+
+    require $file;
+    return true;
+}
+
 function site_dispatch() {
     $page = site_request_page();
     if ($page === "" || $page === "index") {
         return;
+    }
+
+    if (site_serve_admin($page)) {
+        exit;
     }
 
     $pages = site_public_pages();
