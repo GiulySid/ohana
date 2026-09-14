@@ -11,12 +11,24 @@ function site_nav_items() {
     ];
 }
 
-function site_header($current, $title, $description = "") {
+function site_show_guest($show) {
+    $title = is_array($show) ? (string) ($show["titolo"] ?? "") : (string) $show;
+    return preg_match("/shrek/i", $title) ? "shrek" : "";
+}
+
+function site_guest_logo($guest) {
+    $green = dirname(__DIR__) . DIRECTORY_SEPARATOR . "logo-green.png";
+    return $guest === "shrek" && is_file($green) ? "logo-green.png" : "logo.jpg";
+}
+
+function site_header($current, $title, $description = "", $opts = []) {
     $site = data_site();
     $name = $site["nome"] ?: "Ohana Musical Company";
     $fullTitle = $current === "home" ? $name : ($title . " — " . $name);
     $description = $description !== "" ? $description : ($site["tagline"] ?: $name);
     $nav = site_nav_items();
+    $guest = trim((string) ($opts["guest"] ?? ""));
+    $logo = !empty($opts["logo"]) ? (string) $opts["logo"] : site_guest_logo($guest);
 
     header("Content-Type: text/html; charset=utf-8");
     ?>
@@ -34,22 +46,20 @@ function site_header($current, $title, $description = "") {
   <link rel="stylesheet" href="css/site.css">
   <noscript><style>.page-veil{display:none!important}body[data-page="home"] .site-header{opacity:1!important;transform:none!important;pointer-events:auto!important}.curtain{display:none!important}.home-stage{height:100vh!important}</style></noscript>
 </head>
-<body data-page="<?= data_h($current) ?>">
-  <div class="scene" aria-hidden="true">
-    <img src="gs.jpeg" alt="" decoding="async">
-  </div>
+<body data-page="<?= data_h($current) ?>"<?= $guest !== "" ? ' data-guest="' . data_h($guest) . '"' : "" ?>>
+  <div class="scene" aria-hidden="true"></div>
   <div class="veil" aria-hidden="true"></div>
   <div class="page-veil" aria-hidden="true">
     <div class="page-veil__blur"></div>
     <div class="page-veil__dim"></div>
     <div class="page-veil__mark">
-      <img src="logo.jpg" alt="">
+      <img src="<?= data_h($logo) ?>" alt="">
     </div>
   </div>
 
   <header class="site-header">
     <a class="brand" href="./" data-nav>
-      <img src="logo.jpg" alt="<?= data_h($name) ?>" width="64" height="64">
+      <img src="<?= data_h($logo) ?>" alt="<?= data_h($name) ?>" width="64" height="64">
       <span><?= data_h($name) ?></span>
     </a>
     <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="site-nav">Menu</button>
@@ -68,7 +78,7 @@ function site_footer() {
     $name = $site["nome"] ?: "Ohana Musical Company";
     ?>
   </main>
-  <footer class="site-footer">
+  <footer class="site-footer site-footer--velvet">
     <div>
       <p class="footer-mark"><?= data_h($name) ?></p>
       <?php if (!empty($site["orariProve"])) { ?>
@@ -187,8 +197,9 @@ function site_show_card($show, $compact = false) {
     $poster = data_asset($show["locandinaThumb"] ?? "") ?: data_asset($show["locandina"] ?? "");
     $count = count($show["repliche"] ?? []);
     $dates = $count === 1 ? "1 data" : ($count . " date");
+    $guest = site_show_guest($show);
     ?>
-    <a class="show-card<?= $compact ? " show-card--compact" : "" ?>" href="spettacolo?id=<?= data_h($show["id"]) ?>" data-nav>
+    <a class="show-card<?= $compact ? " show-card--compact" : "" ?><?= $guest !== "" ? " show-card--guest" : "" ?>" href="spettacolo?id=<?= data_h($show["id"]) ?>" data-nav>
       <div class="show-card__poster">
         <?php if ($poster) { ?>
           <img src="<?= data_h($poster) ?>" alt="" loading="lazy">

@@ -52,8 +52,10 @@ site_header("home", $name, $site["tagline"] ?? "");
 
 <?php if ($upcoming || !empty($site["chiSiamo"])) { ?>
   <div class="home-follow">
-    <!-- <?php if ($upcoming) { ?>
-      <article class="next-show">
+    <?php if ($upcoming) {
+      $guest = site_show_guest($upcoming);
+      ?>
+      <article class="playbill next-show<?= $guest !== "" ? " playbill--guest" : "" ?>">
         <p class="kicker">Prossimo spettacolo</p>
         <h2><?= data_h($upcoming["titolo"]) ?></h2>
         <?php if ($next) { ?>
@@ -69,10 +71,10 @@ site_header("home", $name, $site["tagline"] ?? "");
         <?php } ?>
         <a class="btn" href="spettacolo?id=<?= data_h($upcoming["id"]) ?>" data-nav>Scopri lo spettacolo</a>
       </article>
-    <?php } ?> -->
+    <?php } ?>
 
     <?php if (!empty($site["chiSiamo"])) { ?>
-      <section class="band band--white about-panel" data-about style="--about: 0">
+      <section class="band band--house about-panel" data-about style="--about: 0">
         <div class="about-grid">
           <div>
             <p class="kicker">Chi siamo</p>
