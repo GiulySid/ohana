@@ -11,9 +11,33 @@ function site_public_pages() {
     ];
 }
 
+function site_base_path() {
+    $script = str_replace("\\", "/", $_SERVER["SCRIPT_NAME"] ?? "/index.php");
+    $dir = trim(dirname($script), "/");
+    if ($dir !== "" && $dir !== ".") {
+        return $dir;
+    }
+
+    $docRoot = str_replace("\\", "/", rtrim((string) ($_SERVER["DOCUMENT_ROOT"] ?? ""), "/"));
+    $appRoot = str_replace("\\", "/", dirname(__DIR__));
+    $docLen = strlen($docRoot);
+    if ($docRoot !== "" && strncasecmp($appRoot, $docRoot, $docLen) === 0) {
+        $rest = substr($appRoot, $docLen);
+        if ($rest === "" || str_starts_with($rest, "/")) {
+            return trim($rest, "/");
+        }
+    }
+
+    return "";
+}
+
 function site_request_page() {
     $uri = parse_url($_SERVER["REQUEST_URI"] ?? "/", PHP_URL_PATH);
     $page = trim(rawurldecode((string) $uri), "/");
+    $base = site_base_path();
+    if ($base !== "" && ($page === $base || str_starts_with($page, $base . "/"))) {
+        $page = trim(substr($page, strlen($base)), "/");
+    }
     if (str_ends_with($page, ".php")) {
         $page = substr($page, 0, -4);
     }

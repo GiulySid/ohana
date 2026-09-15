@@ -22,12 +22,12 @@ $gallery = array_values(array_filter($show["gallery"] ?? [], static function ($f
 $guest = site_show_guest($show);
 site_header("archivio", $show["titolo"], $show["sinossi"] ?: $show["titolo"], $guest !== "" ? [
     "guest" => $guest,
-    "logo" => site_guest_logo($guest),
 ] : []);
 ?>
 <header class="detail-hero">
   <p class="kicker"><?= data_h(($show["stato"] ?? "") === "prossimo" ? "Prossimo spettacolo" : (string) ($show["stagione"] ?: $show["anno"])) ?></p>
-  <h1><?= data_h($show["titolo"]) ?></h1>
+  <?php $titleMark = site_show_title_mark($show); ?>
+  <h1><?php if ($titleMark) { ?><img class="title-mark" src="<?= data_h($titleMark) ?>" alt="<?= data_h($show["titolo"]) ?>"><?php } else { ?><?= data_h($show["titolo"]) ?><?php } ?></h1>
 </header>
 
 <div class="detail-grid">

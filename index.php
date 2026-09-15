@@ -13,6 +13,7 @@ $showreel = site_showreel_src();
 $curtain = site_curtain_src();
 $name = $site["nome"] ?? "Ohana Musical Company";
 
+$brand = site_brand();
 site_header("home", $name, $site["tagline"] ?? "");
 ?>
 <section class="home-stage" data-home-stage<?= $curtain === "" ? " data-home-open" : "" ?>>
@@ -42,7 +43,7 @@ site_header("home", $name, $site["tagline"] ?? "");
         </div>
         <div class="curtain__shade"></div>
         <div class="curtain__logo">
-          <img src="logo.jpg" alt="<?= data_h($name) ?>">
+          <img src="<?= data_h($brand["lockup"]) ?>" alt="<?= data_h($name) ?>">
         </div>
         <p class="curtain__hint">Scorri</p>
       </div>
@@ -57,7 +58,8 @@ site_header("home", $name, $site["tagline"] ?? "");
       ?>
       <article class="playbill next-show<?= $guest !== "" ? " playbill--guest" : "" ?>">
         <p class="kicker">Prossimo spettacolo</p>
-        <h2><?= data_h($upcoming["titolo"]) ?></h2>
+        <?php $titleMark = site_show_title_mark($upcoming); ?>
+        <h2><?php if ($titleMark) { ?><img class="title-mark" src="<?= data_h($titleMark) ?>" alt="<?= data_h($upcoming["titolo"]) ?>"><?php } else { ?><?= data_h($upcoming["titolo"]) ?><?php } ?></h2>
         <?php if ($next) { ?>
           <p>
             <?= data_h(data_format_date($next["data"])) ?>

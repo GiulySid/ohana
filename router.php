@@ -4,10 +4,7 @@ require_once __DIR__ . DIRECTORY_SEPARATOR . "includes" . DIRECTORY_SEPARATOR . 
 
 $uri = parse_url($_SERVER["REQUEST_URI"] ?? "/", PHP_URL_PATH) ?: "/";
 $path = rawurldecode($uri);
-$page = trim($path, "/");
-if (str_ends_with($page, ".php")) {
-    $page = substr($page, 0, -4);
-}
+$page = site_request_page();
 
 $pages = site_public_pages();
 if (isset($pages[$page])) {

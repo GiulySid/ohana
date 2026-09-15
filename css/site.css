@@ -12,8 +12,9 @@
   --line: rgba(247, 247, 247, 0.22);
   --guest: #8fbe3c;
   --ease: cubic-bezier(0.22, 1, 0.36, 1);
-  --font: "Outfit", system-ui, sans-serif;
+  --font: "Rockwell Std", "Rockwell", "Times New Roman", serif;
   --display: "Fraunces", "Times New Roman", serif;
+  --mark: "Traveling Typewriter", "Courier New", monospace;
   --gutter: clamp(1.25rem, 4vw, 4rem);
   --header: 4.75rem;
 }
@@ -28,13 +29,14 @@ html,
 body {
   background: var(--house);
   color: var(--fg);
+  overflow-x: clip;
 }
 
 body {
   font-family: var(--font);
   min-height: 100vh;
+  min-height: 100dvh;
   line-height: 1.55;
-  overflow-x: hidden;
 }
 
 img {
@@ -130,16 +132,13 @@ body.is-leaving .page-veil__dim {
   position: absolute;
   top: 50%;
   left: 50%;
-  width: min(11.5rem, 48vw);
+  width: min(13rem, 56vw);
   aspect-ratio: 1;
-  border-radius: 50%;
-  background: var(--paper);
-  overflow: hidden;
+  background: transparent;
+  overflow: visible;
   opacity: 0;
   transform: translate(-50%, -50%);
-  box-shadow:
-    0 0 48px 12px rgba(255, 255, 255, 0.22),
-    0 0 90px 28px rgba(225, 6, 19, 0.14);
+  filter: drop-shadow(0 0 28px rgba(225, 6, 19, 0.28));
   transition: opacity 0.5s ease;
 }
 
@@ -148,8 +147,7 @@ body.is-leaving .page-veil__dim {
   height: 100%;
   max-width: none;
   object-fit: contain;
-  padding: 8%;
-  background: var(--paper);
+  background: transparent;
 }
 
 html.is-booting .page-veil__mark,
@@ -178,6 +176,7 @@ body.is-leaving .page-veil__mark {
   gap: 1rem;
   min-height: var(--header);
   padding: 0.75rem var(--gutter);
+  overflow: visible;
   background: rgba(18, 9, 10, 0.88);
   backdrop-filter: blur(16px);
 }
@@ -200,25 +199,27 @@ body[data-page="home"].is-nav-in .site-header {
   display: flex;
   align-items: center;
   gap: 0.8rem;
-  font-family: var(--display);
+  font-family: var(--mark);
   font-size: 1.05rem;
-  font-weight: 600;
+  font-weight: 400;
+  letter-spacing: 0.04em;
 }
 
 .brand img {
-  width: 2.6rem;
-  height: 2.6rem;
-  object-fit: cover;
-  border-radius: 50%;
-  background: var(--paper);
-  box-shadow: 0 0 28px 6px rgba(255, 255, 255, 0.2);
+  width: 3.4rem;
+  height: 3.4rem;
+  object-fit: contain;
+  flex-shrink: 0;
+  background: transparent;
 }
 
 .site-nav {
   display: flex;
   gap: 1.4rem;
-  font-size: 0.92rem;
-  font-weight: 500;
+  font-family: var(--mark);
+  font-size: 0.95rem;
+  font-weight: 400;
+  letter-spacing: 0.04em;
 }
 
 .site-nav a {
@@ -277,8 +278,10 @@ body[data-page="home"].is-nav-in .site-header {
 
 .nav-toggle {
   display: none;
-  font-size: 0.92rem;
-  font-weight: 500;
+  font-family: var(--mark);
+  font-size: 0.95rem;
+  font-weight: 400;
+  letter-spacing: 0.04em;
 }
 
 .site-main {
@@ -340,11 +343,18 @@ body[data-page="home"].is-nav-in .site-header {
 }
 
 .hero h1,
-.page-head h1,
 .detail-hero h1 {
   font-family: var(--display);
   font-weight: 600;
   letter-spacing: -0.02em;
+  line-height: 1.05;
+  font-size: clamp(2.6rem, 8vw, 7rem);
+}
+
+.page-head h1 {
+  font-family: var(--mark);
+  font-weight: 400;
+  letter-spacing: 0.02em;
   line-height: 1.05;
   font-size: clamp(2.6rem, 8vw, 7rem);
 }
@@ -355,6 +365,21 @@ body[data-page="home"].is-nav-in .site-header {
   color: var(--muted);
   font-size: 1rem;
   font-weight: 400;
+}
+
+.title-mark {
+  display: block;
+  width: min(36rem, 100%);
+  height: auto;
+}
+
+.playbill .title-mark,
+.next-show .title-mark {
+  width: min(22rem, 100%);
+}
+
+.title-mark--card {
+  width: min(14rem, 100%);
 }
 
 .playbill,
@@ -465,16 +490,19 @@ body[data-page="home"].is-nav-in .site-header {
   --logo-y: 0;
   --shade: 1;
   height: 230vh;
+  height: 230dvh;
 }
 
 .home-stage[data-home-open] {
   height: 100vh;
+  height: 100dvh;
 }
 
 .home-stage__pin {
   position: sticky;
   top: 0;
   height: 100vh;
+  height: 100dvh;
   overflow: hidden;
   background: #000;
 }
@@ -606,14 +634,11 @@ body[data-page="home"].is-nav-in .site-header {
   left: 50%;
   top: 48%;
   z-index: 2;
-  width: min(15rem, 54vw);
+  width: min(16rem, 58vw);
   aspect-ratio: 1;
-  border-radius: 50%;
-  overflow: hidden;
-  background: var(--paper);
-  box-shadow:
-    0 0 48px 12px rgba(255, 255, 255, 0.22),
-    0 0 90px 28px rgba(225, 6, 19, 0.14);
+  background: transparent;
+  overflow: visible;
+  filter: drop-shadow(0 0 28px rgba(225, 6, 19, 0.28));
   transform: translate3d(-50%, calc(-50% - var(--logo-y) * 48vh), 0);
   opacity: var(--logo-o);
 }
@@ -623,8 +648,7 @@ body[data-page="home"].is-nav-in .site-header {
   height: 100%;
   max-width: none;
   object-fit: contain;
-  padding: 9%;
-  background: var(--paper);
+  background: transparent;
 }
 
 .curtain__hint {
@@ -853,9 +877,9 @@ body[data-page="compagnia"] .filters {
 }
 
 .split-hero__text h1 {
-  font-family: var(--display);
-  font-weight: 600;
-  letter-spacing: -0.03em;
+  font-family: var(--mark);
+  font-weight: 400;
+  letter-spacing: 0.02em;
   line-height: 1;
   font-size: clamp(2.6rem, 8vw, 5.2rem);
   margin: 0.15rem 0 0.85rem;
@@ -1068,6 +1092,10 @@ body[data-page="compagnia"] .people-grid {
   padding: clamp(3rem, 8vw, 6rem) var(--gutter) 2rem;
 }
 
+.detail-hero h1 .title-mark {
+  width: min(38rem, 92vw);
+}
+
 .detail-grid {
   display: grid;
   grid-template-columns: minmax(12rem, 22rem) 1fr;
@@ -1224,9 +1252,9 @@ body[data-page="compagnia"] .people-grid {
 }
 
 .contact-head h1 {
-  font-family: var(--display);
-  font-weight: 600;
-  letter-spacing: -0.03em;
+  font-family: var(--mark);
+  font-weight: 400;
+  letter-spacing: 0.02em;
   line-height: 1;
   font-size: clamp(2.6rem, 8vw, 5.2rem);
   margin: 0.15rem 0 0.85rem;
@@ -1370,13 +1398,30 @@ body[data-page="compagnia"] .people-grid {
   background: var(--velvet);
   color: rgba(247, 247, 247, 0.88);
 }
+.footer-copy{
+  margin-left: auto;
+}
+.footer-content{
+  display: flex;
+  align-items: center;
+}
+.footer-brand {
+  display: flex;
+  align-items: center;
+  gap: 1.15rem;
+}
 
-.site-footer--velvet .footer-mark {
-  color: var(--paper);
+.footer-meta {
+  min-width: 0;
 }
 
 .site-footer--velvet a:hover {
   color: var(--paper);
+}
+
+body[data-guest="shrek"] .site-footer--velvet {
+  background: #17320e;
+  background: color-mix(in srgb, var(--guest) 22%, #081205);
 }
 
 body[data-guest="shrek"] .kicker {
@@ -1403,21 +1448,18 @@ body[data-guest="shrek"] .site-nav a::after {
   background: var(--guest);
 }
 
-body[data-guest="shrek"] .brand img,
 body[data-guest="shrek"] .page-veil__mark {
-  box-shadow:
-    0 0 48px 12px rgba(255, 255, 255, 0.22),
-    0 0 90px 28px rgba(143, 190, 60, 0.2);
+  filter: drop-shadow(0 0 28px rgba(143, 190, 60, 0.32));
 }
 
 .footer-mark {
-  font-family: var(--display);
-  font-weight: 600;
-  color: var(--fg);
+  width: 6.5rem;
+  height: auto;
+  flex-shrink: 0;
 }
 
 .footer-links {
-  display: flex;
+  display: grid;
   flex-wrap: wrap;
   gap: 1rem;
 }
@@ -1503,6 +1545,7 @@ body[data-guest="shrek"] .page-veil__mark {
 
   .home-stage {
     height: 200vh;
+    height: 200dvh;
   }
 
   .split-hero__pin {
@@ -1589,6 +1632,7 @@ body[data-guest="shrek"] .page-veil__mark {
 
   .home-stage {
     height: 100vh;
+    height: 100dvh;
   }
 
   .curtain {

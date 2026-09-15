@@ -240,10 +240,11 @@ function admin_layout($title, $body, $options = []) {
     echo '<meta name="viewport" content="width=device-width, initial-scale=1.0">';
     echo '<meta name="robots" content="noindex, nofollow">';
     echo '<title>' . admin_h($title) . " — Ohana Admin</title>";
-    echo '<link rel="icon" href="../favicon.png" type="image/png">';
+    echo '<link rel="icon" href="../img/brand/favicon.png" type="image/png">';
     echo '<link rel="preconnect" href="https://fonts.googleapis.com">';
     echo '<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>';
-    echo '<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">';
+    echo '<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600&display=swap" rel="stylesheet">';
+    echo '<link rel="stylesheet" href="../css/fonts.css">';
     echo '<link rel="stylesheet" href="./admin.css">';
     echo "</head><body class=\"admin" . ($wide ? " admin--wide" : "") . '">';
 

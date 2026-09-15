@@ -16,9 +16,28 @@ function site_show_guest($show) {
     return preg_match("/shrek/i", $title) ? "shrek" : "";
 }
 
+function site_brand($guest = "") {
+    $dir = "img/brand/";
+    if ($guest === "shrek") {
+        return [
+            "mark" => $dir . "ohana-shrek-mark.png",
+            "lockup" => $dir . "ohana-shrek-lockup-on-dark.png",
+        ];
+    }
+    return [
+        "mark" => $dir . "ohana-mark-on-dark.png",
+        "lockup" => $dir . "ohana-lockup-on-dark.png",
+        "lockupLight" => $dir . "ohana-lockup-on-light.png",
+    ];
+}
+
 function site_guest_logo($guest) {
-    $green = dirname(__DIR__) . DIRECTORY_SEPARATOR . "logo-green.png";
-    return $guest === "shrek" && is_file($green) ? "logo-green.png" : "logo.jpg";
+    return site_brand($guest)["mark"];
+}
+
+function site_show_title_mark($show) {
+    $title = is_array($show) ? (string) ($show["titolo"] ?? "") : (string) $show;
+    return preg_match("/greatest\s*show/i", $title) ? "img/brand/greatest-show-wordmark.png" : "";
 }
 
 function site_header($current, $title, $description = "", $opts = []) {
@@ -28,7 +47,13 @@ function site_header($current, $title, $description = "", $opts = []) {
     $description = $description !== "" ? $description : ($site["tagline"] ?: $name);
     $nav = site_nav_items();
     $guest = trim((string) ($opts["guest"] ?? ""));
-    $logo = !empty($opts["logo"]) ? (string) $opts["logo"] : site_guest_logo($guest);
+    $brand = site_brand($guest);
+    $logo = !empty($opts["logo"]) ? (string) $opts["logo"] : $brand["mark"];
+    $lockup = !empty($opts["lockup"]) ? (string) $opts["lockup"] : $brand["lockup"];
+    $GLOBALS["site_guest"] = $guest;
+    $root = dirname(__DIR__);
+    $GLOBALS["site_css_v"] = (int) @filemtime($root . DIRECTORY_SEPARATOR . "css" . DIRECTORY_SEPARATOR . "site.css");
+    $GLOBALS["site_js_v"] = (int) @filemtime($root . DIRECTORY_SEPARATOR . "js" . DIRECTORY_SEPARATOR . "site.js");
 
     header("Content-Type: text/html; charset=utf-8");
     ?>
@@ -39,11 +64,12 @@ function site_header($current, $title, $description = "", $opts = []) {
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title><?= data_h($fullTitle) ?></title>
   <meta name="description" content="<?= data_h($description) ?>">
-  <link rel="icon" href="favicon.png" type="image/png">
+  <link rel="icon" href="img/brand/favicon.png" type="image/png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;1,9..144,400&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="css/site.css">
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;1,9..144,400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/fonts.css">
+  <link rel="stylesheet" href="css/site.css?v=<?= (int) ($GLOBALS["site_css_v"] ?? 0) ?>">
   <noscript><style>.page-veil{display:none!important}body[data-page="home"] .site-header{opacity:1!important;transform:none!important;pointer-events:auto!important}.curtain{display:none!important}.home-stage{height:100vh!important}</style></noscript>
 </head>
 <body data-page="<?= data_h($current) ?>"<?= $guest !== "" ? ' data-guest="' . data_h($guest) . '"' : "" ?>>
@@ -53,7 +79,7 @@ function site_header($current, $title, $description = "", $opts = []) {
     <div class="page-veil__blur"></div>
     <div class="page-veil__dim"></div>
     <div class="page-veil__mark">
-      <img src="<?= data_h($logo) ?>" alt="">
+      <img src="<?= data_h($lockup) ?>" alt="">
     </div>
   </div>
 
@@ -76,17 +102,24 @@ function site_header($current, $title, $description = "", $opts = []) {
 function site_footer() {
     $site = data_site();
     $name = $site["nome"] ?: "Ohana Musical Company";
+    $guest = (string) ($GLOBALS["site_guest"] ?? "");
+    $footerLogo = $guest === "shrek"
+        ? "img/brand/ohana-shrek-lockup-on-dark.png"
+        : "img/brand/ohana-white.png";
     ?>
   </main>
   <footer class="site-footer site-footer--velvet">
-    <div>
-      <p class="footer-mark"><?= data_h($name) ?></p>
-      <?php if (!empty($site["orariProve"])) { ?>
-        <p><?= data_h($site["orariProve"]) ?></p>
-      <?php } ?>
-      <?php if (!empty($site["indirizzo"])) { ?>
-        <p><?= data_h($site["indirizzo"]) ?></p>
-      <?php } ?>
+   <div class="footer-content">
+    <div class="footer-brand">
+      <img class="footer-mark" src="<?= data_h($footerLogo) ?>" alt="<?= data_h($name) ?>">
+      <div class="footer-meta">
+        <?php if (!empty($site["orariProve"])) { ?>
+          <p><?= data_h($site["orariProve"]) ?></p>
+        <?php } ?>
+        <?php if (!empty($site["indirizzo"])) { ?>
+          <p><?= data_h($site["indirizzo"]) ?></p>
+        <?php } ?>
+      </div>
     </div>
     <div class="footer-links">
       <?php if (!empty($site["email"])) { ?>
@@ -100,8 +133,10 @@ function site_footer() {
       <?php } ?>
     </div>
     <p class="footer-copy">&copy; <?= date("Y") ?> <?= data_h($name) ?></p>
+
+  </div> 
   </footer>
-  <script src="js/site.js" defer></script>
+  <script src="js/site.js?v=<?= (int) ($GLOBALS["site_js_v"] ?? 0) ?>" defer></script>
 </body>
 </html>
     <?php
@@ -212,7 +247,8 @@ function site_show_card($show, $compact = false) {
         <?php } ?>
       </div>
       <div class="show-card__body">
-        <h3><?= data_h($show["titolo"] ?? "") ?></h3>
+        <?php $titleMark = site_show_title_mark($show); ?>
+        <h3><?php if ($titleMark) { ?><img class="title-mark title-mark--card" src="<?= data_h($titleMark) ?>" alt="<?= data_h($show["titolo"] ?? "") ?>"><?php } else { ?><?= data_h($show["titolo"] ?? "") ?><?php } ?></h3>
         <p><?= data_h($dates) ?></p>
       </div>
     </a>

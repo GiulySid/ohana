@@ -135,10 +135,6 @@
       return 1 - Math.pow(1 - t, 3);
     }
 
-    function easeInOut(t) {
-      return t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2;
-    }
-
     function playVideo(video) {
       if (!video) return;
       video.play().catch(() => {});
@@ -157,9 +153,9 @@
     }
 
     function setOpen(open) {
-      const split = easeInOut(remap(open, 0, 0.56));
-      const logo = easeOut(remap(open, 0.56, 0.8));
-      const nav = easeOut(remap(open, 0.76, 0.98));
+      const split = easeOut(remap(open, 0, 0.5));
+      const logo = easeOut(remap(open, 0, 0.55));
+      const nav = easeOut(remap(open, 0.62, 0.92));
       stage.style.setProperty("--open", split.toFixed(4));
       stage.style.setProperty("--logo-o", (1 - logo).toFixed(4));
       stage.style.setProperty("--logo-y", logo.toFixed(4));
@@ -168,7 +164,7 @@
       document.body.classList.toggle("is-nav-in", nav > 0.2);
       stage.classList.toggle("is-sound-ready", !hasCurtain || split >= 0.7);
       if (split < 0.55 && showreel && !showreel.muted) syncSound(false);
-      if (split >= 0.08) playVideo(showreel);
+      if (showreel && showreel.paused) playVideo(showreel);
       if (hasCurtain) {
         if (split >= 0.98) {
           pauseVideo(master);
@@ -209,11 +205,17 @@
 
     playVideo(master);
     playVideo(follow);
+    playVideo(showreel);
+
+    function pageScrollY() {
+      return Math.max(window.scrollY || 0, document.documentElement.scrollTop || 0, document.body.scrollTop || 0);
+    }
 
     function update() {
-      const range = Math.max(1, stage.offsetHeight - window.innerHeight);
-      const t = clamp(-stage.getBoundingClientRect().top / range, 0, 1);
-      setOpen(t);
+      const y = Math.max(0, -stage.getBoundingClientRect().top, pageScrollY());
+      const travel = Math.max(1, stage.offsetHeight - window.innerHeight);
+      const range = Math.max(1, Math.min(travel, window.innerHeight * 0.38));
+      setOpen(clamp(y / range, 0, 1));
     }
 
     let ticking = false;
@@ -227,8 +229,14 @@
     }
 
     update();
-    window.addEventListener("scroll", onScroll, { passive: true });
+    const listen = { passive: true };
+    window.addEventListener("scroll", onScroll, listen);
+    document.addEventListener("scroll", onScroll, listen);
+    document.body.addEventListener("scroll", onScroll, listen);
+    window.addEventListener("touchmove", onScroll, listen);
     window.addEventListener("resize", onScroll);
+    window.visualViewport?.addEventListener("resize", onScroll);
+    window.visualViewport?.addEventListener("scroll", onScroll, listen);
   }
 
   function initSplitHero() {
