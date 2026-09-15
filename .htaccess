@@ -14,7 +14,15 @@ AddDefaultCharset UTF-8
   RewriteCond %{REQUEST_URI} !/admin/
   RewriteRule ^([^/]+)\.php$ /%1$1 [R=301,L]
 
-  # /compagnia → compagnia.php (even if a folder with the same name exists, e.g. /media)
+  # /galleria is an alias of media.php (a /media folder already exists)
+  RewriteRule ^galleria/?$ media.php [L]
+
+  # /compagnia → compagnia.php (even if a folder with the same name exists)
   RewriteCond %{REQUEST_FILENAME}.php -f
   RewriteRule ^([^/]+)/?$ $1.php [L]
+
+  # Aliases and unknown paths → front controller (pretty 404s)
+  RewriteCond %{REQUEST_FILENAME} !-f
+  RewriteCond %{REQUEST_FILENAME} !-d
+  RewriteRule ^([^/]+)/?$ index.php [L]
 </IfModule>
