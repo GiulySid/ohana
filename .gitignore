@@ -1,4 +1,8 @@
 admin/credentials.php
+data/registrazione-access.php
+data/inbox/*.json
+data/inbox/*.tmp
+data/inbox/.lock
 data/backups/*
 !data/backups/.gitkeep
 

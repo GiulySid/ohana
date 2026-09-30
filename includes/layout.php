@@ -64,6 +64,9 @@ function site_header($current, $title, $description = "", $opts = []) {
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title><?= data_h($fullTitle) ?></title>
   <meta name="description" content="<?= data_h($description) ?>">
+  <?php if (!empty($opts["robots"])) { ?>
+    <meta name="robots" content="<?= data_h($opts["robots"]) ?>">
+  <?php } ?>
   <link rel="icon" href="img/brand/favicon.png" type="image/png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>

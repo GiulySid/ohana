@@ -9,6 +9,8 @@ $people = data_people(true);
 $person = [
     "id" => "",
     "nome" => "",
+    "soprannome" => "",
+    "pronomi" => "",
     "ruoli" => [],
     "attivoDal" => "",
     "attivoAl" => "",
@@ -33,6 +35,8 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     admin_csrf_check();
 
     $person["nome"] = trim((string) ($_POST["nome"] ?? ""));
+    $person["soprannome"] = trim((string) ($_POST["soprannome"] ?? ""));
+    $person["pronomi"] = trim((string) ($_POST["pronomi"] ?? ""));
     $person["ruoli"] = array_values(array_intersect(array_keys(PERSON_ROLES), (array) ($_POST["ruoli"] ?? [])));
     $person["attivoDal"] = trim((string) ($_POST["attivoDal"] ?? ""));
     $person["attivoAl"] = trim((string) ($_POST["attivoAl"] ?? ""));
@@ -114,6 +118,14 @@ ob_start();
   <label class="admin-field">
     <span>Nome</span>
     <input type="text" name="nome" required value="<?= admin_h($person["nome"]) ?>">
+  </label>
+  <label class="admin-field">
+    <span>Soprannome</span>
+    <input type="text" name="soprannome" placeholder="Come lo chiamano in compagnia" value="<?= admin_h($person["soprannome"]) ?>">
+  </label>
+  <label class="admin-field">
+    <span>Pronomi</span>
+    <input type="text" name="pronomi" placeholder="lei/lui, they/them…" value="<?= admin_h($person["pronomi"]) ?>">
   </label>
   <fieldset class="admin-field">
     <span>Ruoli</span>

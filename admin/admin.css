@@ -119,6 +119,24 @@ button, input, textarea, select { font: inherit; color: inherit; }
   margin: 1.2rem 0;
 }
 
+.admin-toolbar__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  align-items: center;
+}
+
+.admin-reg {
+  margin: 0 0 1.6rem;
+  padding-top: 0.4rem;
+  border-top: 1px solid var(--line);
+  display: grid;
+  gap: 0.8rem;
+}
+
+.admin-reg p { color: var(--muted); }
+.admin-reg a { text-decoration: underline; }
+
 .admin-btn, .admin-btn-ghost {
   display: inline-flex;
   align-items: center;

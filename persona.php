@@ -15,12 +15,22 @@ if (!$person) {
 $photo = data_asset($person["foto"] ?? "") ?: data_asset($person["fotoThumb"] ?? "");
 $cv = data_person_curriculum($person["id"]);
 $period = data_person_period($person);
+$nickname = trim((string) ($person["soprannome"] ?? ""));
+$pronouns = trim((string) ($person["pronomi"] ?? ""));
 
 site_header("compagnia", $person["nome"], $person["bio"] ?: $person["nome"]);
 ?>
 <header class="detail-hero">
   <p class="kicker"><?= data_h(implode(" · ", data_role_labels($person["ruoli"] ?? []))) ?></p>
-  <h1><?= data_h($person["nome"]) ?></h1>
+  <h1>
+    <?= data_h($person["nome"]) ?>
+    <?php if ($nickname !== "") { ?>
+      <span class="person-nick">(<?= data_h($nickname) ?>)</span>
+    <?php } ?>
+    <?php if ($pronouns !== "") { ?>
+      <span class="person-pronouns"><?= data_h($pronouns) ?></span>
+    <?php } ?>
+  </h1>
   <?php if ($period !== "") { ?>
     <p class="lead"><?= data_h($period) ?><?= data_person_is_active($person) ? "" : " · non più in compagnia" ?></p>
   <?php } ?>

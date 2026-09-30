@@ -525,3 +525,215 @@ function data_role_labels($roles) {
     }
     return $labels;
 }
+
+function data_registration_access_path() {
+    return DATA_DIR . DIRECTORY_SEPARATOR . "registrazione-access.php";
+}
+
+function data_registration_access() {
+    $path = data_registration_access_path();
+    if (!is_file($path)) {
+        return null;
+    }
+    $data = include $path;
+    if (!is_array($data) || empty($data["password_hash"])) {
+        return null;
+    }
+    return $data;
+}
+
+function data_registration_set_password($password) {
+    if (!is_dir(DATA_DIR) && !@mkdir(DATA_DIR, 0755, true)) {
+        return false;
+    }
+    $payload = var_export([
+        "password_hash" => password_hash($password, PASSWORD_DEFAULT),
+    ], true);
+    $ok = file_put_contents(data_registration_access_path(), "<?php\nreturn {$payload};\n", LOCK_EX);
+    if ($ok === false) {
+        return false;
+    }
+    @chmod(data_registration_access_path(), 0600);
+    return true;
+}
+
+function data_inbox_dir() {
+    return DATA_DIR . DIRECTORY_SEPARATOR . "inbox";
+}
+
+function data_inbox_is_inside($path) {
+    $dir = realpath(data_inbox_dir());
+    $file = realpath($path);
+    if ($dir === false || $file === false || !is_file($file)) {
+        return false;
+    }
+    return str_starts_with($file, $dir . DIRECTORY_SEPARATOR);
+}
+
+function data_inbox_files() {
+    $dir = data_inbox_dir();
+    if (!is_dir($dir)) {
+        return [];
+    }
+    $files = glob($dir . DIRECTORY_SEPARATOR . "*.json") ?: [];
+    $safe = [];
+    foreach ($files as $file) {
+        if (data_inbox_is_inside($file)) {
+            $safe[] = realpath($file);
+        }
+    }
+    sort($safe);
+    return $safe;
+}
+
+function data_inbox_media_path($value) {
+    $value = str_replace("\\", "/", trim((string) $value));
+    if ($value === "" || str_contains($value, "..") || !str_starts_with($value, "media/compagnia/")) {
+        return "";
+    }
+    return $value;
+}
+
+function data_inbox_person(array $row, $id) {
+    $roles = array_values(array_intersect(array_keys(PERSON_ROLES), (array) ($row["ruoli"] ?? [])));
+    return [
+        "id" => $id,
+        "nome" => trim((string) ($row["nome"] ?? "")),
+        "soprannome" => trim((string) ($row["soprannome"] ?? "")),
+        "pronomi" => trim((string) ($row["pronomi"] ?? "")),
+        "ruoli" => $roles,
+        "attivoDal" => trim((string) ($row["attivoDal"] ?? "")),
+        "attivoAl" => trim((string) ($row["attivoAl"] ?? "")),
+        "bio" => trim((string) ($row["bio"] ?? "")),
+        "foto" => data_inbox_media_path($row["foto"] ?? ""),
+        "fotoThumb" => data_inbox_media_path($row["fotoThumb"] ?? ""),
+        "hidden" => true,
+    ];
+}
+
+function data_inbox_encode(array $person) {
+    $json = json_encode($person, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES);
+    return $json === false ? null : $json . "\n";
+}
+
+function data_inbox_write(array $person) {
+    $dir = data_inbox_dir();
+    if (!is_dir($dir) && !@mkdir($dir, 0755, true)) {
+        return false;
+    }
+    $json = data_inbox_encode($person);
+    if ($json === null) {
+        return false;
+    }
+    $name = date("Ymd-His") . "-" . bin2hex(random_bytes(3)) . ".json";
+    $path = $dir . DIRECTORY_SEPARATOR . $name;
+    $tmp = $path . ".tmp";
+    if (file_put_contents($tmp, $json, LOCK_EX) === false) {
+        return false;
+    }
+    if (!@rename($tmp, $path)) {
+        @unlink($tmp);
+        return false;
+    }
+    return true;
+}
+
+function data_inbox_save($path, array $person) {
+    if (!data_inbox_is_inside($path)) {
+        return false;
+    }
+    $json = data_inbox_encode($person);
+    if ($json === null) {
+        return false;
+    }
+    $tmp = $path . ".tmp";
+    if (file_put_contents($tmp, $json, LOCK_EX) === false) {
+        return false;
+    }
+    if (!@rename($tmp, $path)) {
+        @unlink($tmp);
+        return false;
+    }
+    return true;
+}
+
+function data_inbox_import() {
+    $dir = data_inbox_dir();
+    if (!is_dir($dir) && !@mkdir($dir, 0755, true)) {
+        return ["ok" => false, "error" => "Impossibile creare data/inbox.", "added" => 0, "invalid" => 0, "left" => 0];
+    }
+    $lock = fopen($dir . DIRECTORY_SEPARATOR . ".lock", "c");
+    if ($lock === false || !flock($lock, LOCK_EX)) {
+        if (is_resource($lock)) {
+            fclose($lock);
+        }
+        return ["ok" => false, "error" => "Import già in corso. Riprova tra un attimo.", "added" => 0, "invalid" => 0, "left" => count(data_inbox_files())];
+    }
+
+    $added = 0;
+    $invalid = 0;
+    try {
+        $people = data_people(true);
+        $used = [];
+        foreach ($people as $person) {
+            $id = (string) ($person["id"] ?? "");
+            if ($id !== "") {
+                $used[$id] = true;
+            }
+        }
+        $toDelete = [];
+        foreach (data_inbox_files() as $path) {
+            $decoded = json_decode((string) file_get_contents($path), true);
+            if (!is_array($decoded)) {
+                $invalid += 1;
+                continue;
+            }
+            $nome = trim((string) ($decoded["nome"] ?? ""));
+            if ($nome === "") {
+                $invalid += 1;
+                continue;
+            }
+            $existingId = trim((string) ($decoded["id"] ?? ""));
+            if ($existingId !== "" && isset($used[$existingId])) {
+                $knownName = "";
+                foreach ($people as $person) {
+                    if (($person["id"] ?? "") === $existingId) {
+                        $knownName = trim((string) ($person["nome"] ?? ""));
+                        break;
+                    }
+                }
+                if ($knownName === $nome) {
+                    $toDelete[] = $path;
+                    continue;
+                }
+            }
+            $newId = data_unique_id(array_keys($used), $nome);
+            if ($newId === null) {
+                $invalid += 1;
+                continue;
+            }
+            $person = data_inbox_person($decoded, $newId);
+            $person["nome"] = $nome;
+            if (!data_inbox_save($path, $person)) {
+                return ["ok" => false, "error" => "Impossibile aggiornare un file in inbox.", "added" => 0, "invalid" => $invalid, "left" => count(data_inbox_files())];
+            }
+            $people[] = $person;
+            $used[$newId] = true;
+            $toDelete[] = $path;
+            $added += 1;
+        }
+        if ($added > 0 && !data_write("compagnia", ["people" => array_values($people)])) {
+            return ["ok" => false, "error" => "Impossibile scrivere compagnia.json. Controlla i permessi della cartella data/.", "added" => 0, "invalid" => $invalid, "left" => count(data_inbox_files())];
+        }
+        foreach ($toDelete as $path) {
+            if (data_inbox_is_inside($path)) {
+                @unlink($path);
+            }
+        }
+    } finally {
+        flock($lock, LOCK_UN);
+        fclose($lock);
+    }
+
+    return ["ok" => true, "error" => "", "added" => $added, "invalid" => $invalid, "left" => count(data_inbox_files())];
+}
