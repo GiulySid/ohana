@@ -151,7 +151,11 @@ if ($open && $_SERVER["REQUEST_METHOD"] === "POST") {
     }
 }
 
-site_header("registrazione", "Registrazione", "Scheda compagnia Ohana Musical Company.", ["robots" => "noindex, nofollow"]);
+site_header("registrazione", "Registrazione", "Scheda compagnia Ohana Musical Company.", [
+    "robots" => "noindex, nofollow",
+    "guest" => "shrek",
+    "hideNav" => true,
+]);
 ?>
 <header class="page-head">
   <p class="kicker">Compagnia</p>

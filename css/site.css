@@ -1541,10 +1541,20 @@ body[data-guest="shrek"] .contact-form {
 
 body[data-guest="shrek"] .btn:hover,
 body[data-guest="shrek"] .playbill .btn:hover,
+body[data-guest="shrek"] .contact-form .btn:hover,
 body[data-guest="shrek"] .filter:hover {
   background: var(--guest);
   border-color: var(--guest);
   color: var(--ink);
+}
+
+body[data-guest="shrek"] .contact-form input:focus,
+body[data-guest="shrek"] .contact-form textarea:focus {
+  border-bottom-color: var(--guest);
+}
+
+body[data-guest="shrek"] .contact-form .reg-roles input[type="checkbox"] {
+  accent-color: var(--guest);
 }
 
 body[data-guest="shrek"] .site-nav a::after {

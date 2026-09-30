@@ -91,12 +91,14 @@ function site_header($current, $title, $description = "", $opts = []) {
       <img src="<?= data_h($logo) ?>" alt="<?= data_h($name) ?>" width="64" height="64">
       <span><?= data_h($name) ?></span>
     </a>
-    <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="site-nav">Menu</button>
-    <nav id="site-nav" class="site-nav">
-      <?php foreach ($nav as $key => $item) { ?>
-        <a href="<?= data_h($item["href"]) ?>" data-nav<?= $current === $key ? ' aria-current="page"' : "" ?>><?= data_h($item["label"]) ?></a>
-      <?php } ?>
-    </nav>
+    <?php if (empty($opts["hideNav"])) { ?>
+      <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="site-nav">Menu</button>
+      <nav id="site-nav" class="site-nav">
+        <?php foreach ($nav as $key => $item) { ?>
+          <a href="<?= data_h($item["href"]) ?>" data-nav<?= $current === $key ? ' aria-current="page"' : "" ?>><?= data_h($item["label"]) ?></a>
+        <?php } ?>
+      </nav>
+    <?php } ?>
   </header>
   <main class="site-main" id="main">
     <?php
