@@ -49,6 +49,16 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         exit;
     }
 
+    if ($action === "reg_close") {
+        if (!data_registration_close()) {
+            admin_flash("error", "Impossibile chiudere la registrazione. Controlla i permessi della cartella data/.");
+        } else {
+            admin_flash("success", "Registrazione chiusa. La pagina /registrazione non accetta più schede.");
+        }
+        header("Location: compagnia.php");
+        exit;
+    }
+
     $id = (string) ($_POST["id"] ?? "");
     $people = data_people(true);
     $index = null;
@@ -127,6 +137,13 @@ ob_start();
       <button class="admin-btn-ghost" type="submit"><?= $registrationOpen ? "Cambia password" : "Attiva registrazione" ?></button>
     </div>
   </form>
+  <?php if ($registrationOpen) { ?>
+    <form method="post" data-confirm="Chiudere la registrazione? La pagina non accetterà più schede finché non imposti una nuova password.">
+      <?= admin_csrf_field() ?>
+      <input type="hidden" name="action" value="reg_close">
+      <button class="admin-btn-ghost" type="submit">Chiudi registrazione</button>
+    </form>
+  <?php } ?>
 </section>
 <?php if (!$people) { ?>
   <p class="admin-empty">Nessun profilo. Aggiungi la prima persona.</p>

@@ -177,6 +177,13 @@ button, input, textarea, select { font: inherit; color: inherit; }
 
 .admin-field textarea { min-height: 8rem; resize: vertical; }
 .admin-check { display: flex; gap: 0.6rem; align-items: center; color: var(--muted); }
+.admin-check input[type="checkbox"] {
+  width: 1.05rem;
+  height: 1.05rem;
+  margin: 0;
+  padding: 0;
+  flex: 0 0 auto;
+}
 .admin-roles { display: flex; flex-wrap: wrap; gap: 0.8rem; }
 .admin-flash { margin-bottom: 1.2rem; padding: 0.8rem 1rem; border: 1px solid var(--line); }
 .admin-flash--success { border-color: var(--red); }

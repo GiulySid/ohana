@@ -58,6 +58,9 @@ function reg_store_photo($file, $basename) {
 
 $access = data_registration_access();
 $open = $access !== null;
+if (!$open) {
+    unset($_SESSION["reg_ok"]);
+}
 $unlocked = $open && !empty($_SESSION["reg_ok"]);
 $error = "";
 $done = isset($_GET["inviata"]);
@@ -188,7 +191,7 @@ site_header("registrazione", "Registrazione", "Scheda compagnia Ohana Musical Co
           <input type="text" id="website" name="website" tabindex="-1" autocomplete="off">
         </label>
         <label>
-          <span>Nome</span>
+          <span>Nome Cognome</span>
           <input type="text" name="nome" required maxlength="120" value="<?= data_h($values["nome"]) ?>">
         </label>
         <label>
@@ -205,7 +208,7 @@ site_header("registrazione", "Registrazione", "Scheda compagnia Ohana Musical Co
             <?php foreach (PERSON_ROLES as $key => $label) { ?>
               <label>
                 <input type="checkbox" name="ruoli[]" value="<?= data_h($key) ?>"<?= in_array($key, $values["ruoli"], true) ? " checked" : "" ?>>
-                <?= data_h($label) ?>
+                <span><?= data_h($label) ?></span>
               </label>
             <?php } ?>
           </div>

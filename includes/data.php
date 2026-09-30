@@ -557,6 +557,14 @@ function data_registration_set_password($password) {
     return true;
 }
 
+function data_registration_close() {
+    $path = data_registration_access_path();
+    if (!is_file($path)) {
+        return true;
+    }
+    return @unlink($path);
+}
+
 function data_inbox_dir() {
     return DATA_DIR . DIRECTORY_SEPARATOR . "inbox";
 }
