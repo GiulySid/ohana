@@ -12,15 +12,25 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         $result = data_inbox_import();
         if (!$result["ok"]) {
             admin_flash("error", $result["error"]);
-        } elseif ((int) $result["added"] === 0 && (int) $result["invalid"] > 0) {
+        } elseif ((int) $result["added"] === 0 && (int) $result["updated"] === 0 && (int) $result["invalid"] > 0) {
             admin_flash("error", "Nessuna scheda valida in inbox.");
-        } elseif ((int) $result["added"] === 0) {
-            admin_flash("success", "Nessuna persona nuova da importare.");
+        } elseif ((int) $result["added"] === 0 && (int) $result["updated"] === 0) {
+            admin_flash("success", "Nessuna scheda da importare.");
         } else {
+            $parts = [];
             $added = (int) $result["added"];
-            $message = $added === 1
-                ? "Importata 1 persona. Resta nascosta finché non premi Mostra."
-                : "Importate {$added} persone. Restano nascoste finché non premi Mostra.";
+            $updated = (int) $result["updated"];
+            if ($added === 1) {
+                $parts[] = "Importata 1 persona nuova (nascosta finché non premi Mostra).";
+            } elseif ($added > 1) {
+                $parts[] = "Importate {$added} persone nuove (nascoste finché non premi Mostra).";
+            }
+            if ($updated === 1) {
+                $parts[] = "Aggiornato 1 profilo esistente.";
+            } elseif ($updated > 1) {
+                $parts[] = "Aggiornati {$updated} profili esistenti.";
+            }
+            $message = implode(" ", $parts);
             if ((int) $result["invalid"] > 0) {
                 $message .= " " . (int) $result["invalid"] . " file non validi sono rimasti in inbox.";
             }
@@ -53,7 +63,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         if (!data_registration_close()) {
             admin_flash("error", "Impossibile chiudere la registrazione. Controlla i permessi della cartella data/.");
         } else {
-            admin_flash("success", "Registrazione chiusa. La pagina /registrazione non accetta più schede.");
+            admin_flash("success", "Registrazione chiusa. /registrazione e /modifica-registrazione non accettano più schede.");
         }
         header("Location: compagnia.php");
         exit;
@@ -124,14 +134,14 @@ ob_start();
       <form method="post">
         <?= admin_csrf_field() ?>
         <input type="hidden" name="action" value="import">
-        <button class="admin-btn" type="submit" data-confirm="Importare le schede in inbox? Restano nascoste sul sito.">Importa <?= (int) $inboxCount ?></button>
+        <button class="admin-btn" type="submit" data-confirm="Importare le schede in inbox? Le nuove restano nascoste; le modifiche aggiornano i profili esistenti.">Importa <?= (int) $inboxCount ?></button>
       </form>
     <?php } ?>
     <a class="admin-btn" href="persona.php">Aggiungi</a>
   </div>
 </div>
 <section class="admin-reg">
-  <p>Link per il QR: <a href="../registrazione" target="_blank" rel="noopener">/registrazione</a><?= $registrationOpen ? "" : ". La pagina è chiusa finché non imposti una password." ?></p>
+  <p>Link: <a href="../registrazione" target="_blank" rel="noopener">/registrazione</a> · <a href="../modifica-registrazione" target="_blank" rel="noopener">/modifica-registrazione</a><?= $registrationOpen ? "" : ". Chiuse finché non imposti una password." ?></p>
   <form method="post">
     <?= admin_csrf_field() ?>
     <input type="hidden" name="action" value="reg_password">

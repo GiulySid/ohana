@@ -9,6 +9,7 @@ function site_public_pages() {
         "persona" => "persona.php",
         "spettacolo" => "spettacolo.php",
         "registrazione" => "registrazione.php",
+        "modifica-registrazione" => "modifica-registrazione.php",
     ];
 }
 

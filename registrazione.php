@@ -2,59 +2,9 @@
 
 require_once __DIR__ . DIRECTORY_SEPARATOR . "includes" . DIRECTORY_SEPARATOR . "dispatch.php";
 require_once __DIR__ . DIRECTORY_SEPARATOR . "includes" . DIRECTORY_SEPARATOR . "layout.php";
+require_once __DIR__ . DIRECTORY_SEPARATOR . "includes" . DIRECTORY_SEPARATOR . "registrazione-lib.php";
 
-header("X-Robots-Tag: noindex, nofollow");
-
-$https = !empty($_SERVER["HTTPS"]) && $_SERVER["HTTPS"] !== "off";
-$base = trim(str_replace("\\", "/", site_base_path()), "/");
-session_name("ohana_reg");
-session_set_cookie_params([
-    "lifetime" => 0,
-    "path" => $base === "" ? "/" : "/" . $base,
-    "secure" => $https,
-    "httponly" => true,
-    "samesite" => "Lax",
-]);
-session_start();
-
-function reg_token() {
-    if (empty($_SESSION["csrf"])) {
-        $_SESSION["csrf"] = bin2hex(random_bytes(32));
-    }
-    return $_SESSION["csrf"];
-}
-
-function reg_token_ok() {
-    $token = $_POST["csrf"] ?? "";
-    return is_string($token) && hash_equals($_SESSION["csrf"] ?? "", $token);
-}
-
-function reg_line($value, $max) {
-    $value = str_replace(["\r", "\n"], " ", trim((string) $value));
-    $value = preg_replace("/\s+/", " ", $value) ?? $value;
-    if (function_exists("mb_substr")) {
-        return mb_substr($value, 0, $max);
-    }
-    return substr($value, 0, $max);
-}
-
-function reg_store_photo($file, $basename) {
-    if (!is_array($file) || (int) ($file["error"] ?? UPLOAD_ERR_NO_FILE) === UPLOAD_ERR_NO_FILE) {
-        return [null, null];
-    }
-    $code = (int) ($file["error"] ?? UPLOAD_ERR_NO_FILE);
-    if ($code !== UPLOAD_ERR_OK) {
-        return [null, "La foto non è arrivata. Prova con un file più piccolo."];
-    }
-    if ((int) ($file["size"] ?? 0) > 16777216) {
-        return [null, "La foto supera i 16 MB."];
-    }
-    $tmp = (string) ($file["tmp_name"] ?? "");
-    if ($tmp === "" || !is_uploaded_file($tmp)) {
-        return [null, "Impossibile leggere la foto."];
-    }
-    return data_store_image($tmp, "media/compagnia", $basename);
-}
+reg_boot();
 
 $access = data_registration_access();
 $open = $access !== null;
@@ -75,42 +25,17 @@ $values = [
 ];
 
 if ($open && $_SERVER["REQUEST_METHOD"] === "POST") {
-    $contentLength = (int) ($_SERVER["CONTENT_LENGTH"] ?? 0);
-    $postEmpty = empty($_POST) && empty($_FILES);
-    if ($contentLength > 0 && $postEmpty) {
+    if (reg_post_too_large()) {
         $error = "La foto è troppo grande per il server. Prova con un'immagine più leggera.";
     } elseif (!reg_token_ok()) {
         $error = "Il modulo è scaduto. Riprova.";
     } elseif (isset($_POST["password"]) && !$unlocked) {
-        $fails = (int) ($_SESSION["reg_fails"] ?? 0);
-        if ($fails >= 8) {
-            $error = "Troppi tentativi. Aspetta un minuto e riprova.";
-        } else {
-            if ($fails > 2) {
-                usleep(400000 * $fails);
-            }
-            $password = (string) $_POST["password"];
-            if (password_verify($password, (string) $access["password_hash"])) {
-                session_regenerate_id(true);
-                $_SESSION["reg_ok"] = 1;
-                $_SESSION["reg_fails"] = 0;
-                $_SESSION["csrf"] = bin2hex(random_bytes(32));
-                $unlocked = true;
-            } else {
-                $_SESSION["reg_fails"] = $fails + 1;
-                $error = "Password non corretta.";
-            }
+        if (reg_try_unlock($access, $error)) {
+            $unlocked = true;
         }
     } elseif ($unlocked && isset($_POST["nome"])) {
         $honeypot = trim((string) ($_POST["website"] ?? ""));
-        $values["nome"] = reg_line($_POST["nome"] ?? "", 120);
-        $values["soprannome"] = reg_line($_POST["soprannome"] ?? "", 80);
-        $values["pronomi"] = reg_line($_POST["pronomi"] ?? "", 40);
-        $values["ruoli"] = array_values(array_intersect(array_keys(PERSON_ROLES), (array) ($_POST["ruoli"] ?? [])));
-        $values["attivoDal"] = reg_line($_POST["attivoDal"] ?? "", 12);
-        $values["attivoAl"] = reg_line($_POST["attivoAl"] ?? "", 12);
-        $bio = trim((string) ($_POST["bio"] ?? ""));
-        $values["bio"] = function_exists("mb_substr") ? mb_substr($bio, 0, 5000) : substr($bio, 0, 5000);
+        $values = reg_collect_values();
 
         if ($honeypot !== "") {
             header("Location: registrazione?inviata=1");

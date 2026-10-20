@@ -603,8 +603,12 @@ function data_inbox_media_path($value) {
     return $value;
 }
 
-function data_inbox_person(array $row, $id) {
+function data_inbox_person(array $row, $id, $existing = null) {
     $roles = array_values(array_intersect(array_keys(PERSON_ROLES), (array) ($row["ruoli"] ?? [])));
+    $hidden = true;
+    if (is_array($existing)) {
+        $hidden = !empty($existing["hidden"]);
+    }
     return [
         "id" => $id,
         "nome" => trim((string) ($row["nome"] ?? "")),
@@ -616,7 +620,7 @@ function data_inbox_person(array $row, $id) {
         "bio" => trim((string) ($row["bio"] ?? "")),
         "foto" => data_inbox_media_path($row["foto"] ?? ""),
         "fotoThumb" => data_inbox_media_path($row["fotoThumb"] ?? ""),
-        "hidden" => true,
+        "hidden" => $hidden,
     ];
 }
 
@@ -669,25 +673,28 @@ function data_inbox_save($path, array $person) {
 function data_inbox_import() {
     $dir = data_inbox_dir();
     if (!is_dir($dir) && !@mkdir($dir, 0755, true)) {
-        return ["ok" => false, "error" => "Impossibile creare data/inbox.", "added" => 0, "invalid" => 0, "left" => 0];
+        return ["ok" => false, "error" => "Impossibile creare data/inbox.", "added" => 0, "updated" => 0, "invalid" => 0, "left" => 0];
     }
     $lock = fopen($dir . DIRECTORY_SEPARATOR . ".lock", "c");
     if ($lock === false || !flock($lock, LOCK_EX)) {
         if (is_resource($lock)) {
             fclose($lock);
         }
-        return ["ok" => false, "error" => "Import già in corso. Riprova tra un attimo.", "added" => 0, "invalid" => 0, "left" => count(data_inbox_files())];
+        return ["ok" => false, "error" => "Import già in corso. Riprova tra un attimo.", "added" => 0, "updated" => 0, "invalid" => 0, "left" => count(data_inbox_files())];
     }
 
     $added = 0;
+    $updated = 0;
     $invalid = 0;
     try {
         $people = data_people(true);
         $used = [];
-        foreach ($people as $person) {
+        $indexById = [];
+        foreach ($people as $index => $person) {
             $id = (string) ($person["id"] ?? "");
             if ($id !== "") {
                 $used[$id] = true;
+                $indexById[$id] = $index;
             }
         }
         $toDelete = [];
@@ -703,18 +710,26 @@ function data_inbox_import() {
                 continue;
             }
             $existingId = trim((string) ($decoded["id"] ?? ""));
-            if ($existingId !== "" && isset($used[$existingId])) {
-                $knownName = "";
-                foreach ($people as $person) {
-                    if (($person["id"] ?? "") === $existingId) {
-                        $knownName = trim((string) ($person["nome"] ?? ""));
-                        break;
-                    }
+            if ($existingId !== "" && isset($indexById[$existingId])) {
+                $index = $indexById[$existingId];
+                $old = $people[$index];
+                $person = data_inbox_person($decoded, $existingId, $old);
+                $person["nome"] = $nome;
+                if (!data_inbox_save($path, $person)) {
+                    return ["ok" => false, "error" => "Impossibile aggiornare un file in inbox.", "added" => 0, "updated" => 0, "invalid" => $invalid, "left" => count(data_inbox_files())];
                 }
-                if ($knownName === $nome) {
-                    $toDelete[] = $path;
-                    continue;
+                $oldFoto = (string) ($old["foto"] ?? "");
+                $oldThumb = (string) ($old["fotoThumb"] ?? "");
+                if ($person["foto"] !== $oldFoto && $oldFoto !== "") {
+                    data_delete_rel($oldFoto);
                 }
+                if ($person["fotoThumb"] !== $oldThumb && $oldThumb !== "" && $oldThumb !== $person["foto"]) {
+                    data_delete_rel($oldThumb);
+                }
+                $people[$index] = $person;
+                $toDelete[] = $path;
+                $updated += 1;
+                continue;
             }
             $newId = data_unique_id(array_keys($used), $nome);
             if ($newId === null) {
@@ -724,15 +739,16 @@ function data_inbox_import() {
             $person = data_inbox_person($decoded, $newId);
             $person["nome"] = $nome;
             if (!data_inbox_save($path, $person)) {
-                return ["ok" => false, "error" => "Impossibile aggiornare un file in inbox.", "added" => 0, "invalid" => $invalid, "left" => count(data_inbox_files())];
+                return ["ok" => false, "error" => "Impossibile aggiornare un file in inbox.", "added" => 0, "updated" => 0, "invalid" => $invalid, "left" => count(data_inbox_files())];
             }
             $people[] = $person;
             $used[$newId] = true;
+            $indexById[$newId] = count($people) - 1;
             $toDelete[] = $path;
             $added += 1;
         }
-        if ($added > 0 && !data_write("compagnia", ["people" => array_values($people)])) {
-            return ["ok" => false, "error" => "Impossibile scrivere compagnia.json. Controlla i permessi della cartella data/.", "added" => 0, "invalid" => $invalid, "left" => count(data_inbox_files())];
+        if (($added > 0 || $updated > 0) && !data_write("compagnia", ["people" => array_values($people)])) {
+            return ["ok" => false, "error" => "Impossibile scrivere compagnia.json. Controlla i permessi della cartella data/.", "added" => 0, "updated" => 0, "invalid" => $invalid, "left" => count(data_inbox_files())];
         }
         foreach ($toDelete as $path) {
             if (data_inbox_is_inside($path)) {
@@ -744,5 +760,5 @@ function data_inbox_import() {
         fclose($lock);
     }
 
-    return ["ok" => true, "error" => "", "added" => $added, "invalid" => $invalid, "left" => count(data_inbox_files())];
+    return ["ok" => true, "error" => "", "added" => $added, "updated" => $updated, "invalid" => $invalid, "left" => count(data_inbox_files())];
 }
