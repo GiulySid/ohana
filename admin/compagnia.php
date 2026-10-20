@@ -63,7 +63,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         if (!data_registration_close()) {
             admin_flash("error", "Impossibile chiudere la registrazione. Controlla i permessi della cartella data/.");
         } else {
-            admin_flash("success", "Registrazione chiusa. /registrazione e /modifica-registrazione non accettano più schede.");
+            admin_flash("success", "Registrazione chiusa. La pagina /registrazione non accetta più schede.");
         }
         header("Location: compagnia.php");
         exit;
@@ -141,7 +141,7 @@ ob_start();
   </div>
 </div>
 <section class="admin-reg">
-  <p>Link: <a href="../registrazione" target="_blank" rel="noopener">/registrazione</a> · <a href="../modifica-registrazione" target="_blank" rel="noopener">/modifica-registrazione</a><?= $registrationOpen ? "" : ". Chiuse finché non imposti una password." ?></p>
+  <p>Link per il QR: <a href="../registrazione" target="_blank" rel="noopener">/registrazione</a><?= $registrationOpen ? " (nuovo profilo o modifica)." : ". La pagina è chiusa finché non imposti una password." ?></p>
   <form method="post">
     <?= admin_csrf_field() ?>
     <input type="hidden" name="action" value="reg_password">

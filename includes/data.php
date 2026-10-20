@@ -605,9 +605,12 @@ function data_inbox_media_path($value) {
 
 function data_inbox_person(array $row, $id, $existing = null) {
     $roles = array_values(array_intersect(array_keys(PERSON_ROLES), (array) ($row["ruoli"] ?? [])));
-    $hidden = true;
-    if (is_array($existing)) {
+    if (array_key_exists("hidden", $row)) {
+        $hidden = !empty($row["hidden"]);
+    } elseif (is_array($existing)) {
         $hidden = !empty($existing["hidden"]);
+    } else {
+        $hidden = true;
     }
     return [
         "id" => $id,
