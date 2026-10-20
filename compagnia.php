@@ -19,14 +19,14 @@ site_header("compagnia", "Compagnia", "Chi ha dato voce, corpo e luce a Ohana.")
         <div class="split-hero__text">
           <p class="kicker">La famiglia</p>
           <h1>Compagnia</h1>
-          <p>Attori, registi, tecnici e chi ha collaborato anche solo per una stagione. Il palco ricorda tutti.</p>
+          <p>Attori, registi, musicisti, tecnici e chi ha collaborato anche solo per una stagione. Il palco ricorda tutti.</p>
         </div>
       </div>
       <div class="split-hero__half split-hero__half--right" aria-hidden="true">
         <div class="split-hero__text">
           <p class="kicker">La famiglia</p>
           <h1>Compagnia</h1>
-          <p>Attori, registi, tecnici e chi ha collaborato anche solo per una stagione. Il palco ricorda tutti.</p>
+          <p>Attori, registi, musicisti, tecnici e chi ha collaborato anche solo per una stagione. Il palco ricorda tutti.</p>
         </div>
       </div>
     </div>

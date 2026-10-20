@@ -7,6 +7,7 @@ const DATA_BACKUP_DIR = DATA_DIR . DIRECTORY_SEPARATOR . "backups";
 const PERSON_ROLES = [
     "attore" => "Attori",
     "regista" => "Registi",
+    "musicista" => "Musicisti",
     "tecnico" => "Tecnici",
     "collaboratore" => "Collaboratori",
 ];

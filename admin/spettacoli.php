@@ -6,9 +6,18 @@ admin_require_login();
 
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
     admin_csrf_check();
-    $id = (string) ($_POST["id"] ?? "");
     $action = (string) ($_POST["action"] ?? "");
     $shows = data_shows(true);
+
+    if ($action === "hide_all" || $action === "show_all") {
+        $shows = admin_set_all_hidden($shows, $action === "hide_all");
+        data_write("spettacoli", ["shows" => $shows]);
+        admin_flash("success", $action === "hide_all" ? "Tutti gli spettacoli sono nascosti." : "Tutti gli spettacoli sono visibili.");
+        header("Location: spettacoli.php");
+        exit;
+    }
+
+    $id = (string) ($_POST["id"] ?? "");
     $index = null;
     foreach ($shows as $i => $show) {
         if (($show["id"] ?? "") === $id) {
@@ -51,7 +60,12 @@ ob_start();
     <p class="admin-kicker">Palco</p>
     <h1 class="admin-title">Spettacoli</h1>
   </div>
-  <a class="admin-btn" href="spettacolo.php">Aggiungi</a>
+  <div class="admin-toolbar__actions">
+    <?php if ($shows) { ?>
+      <?= admin_bulk_visibility_forms() ?>
+    <?php } ?>
+    <a class="admin-btn" href="spettacolo.php">Aggiungi</a>
+  </div>
 </div>
 <?php if (!$shows) { ?>
   <p class="admin-empty">Nessuno spettacolo. Aggiungi il primo titolo.</p>

@@ -26,7 +26,7 @@ ob_start();
     <div>
       <p class="admin-kicker">Compagnia</p>
       <h2>Persone</h2>
-      <p>Attori, registi, tecnici, collaboratori</p>
+      <p>Attori, registi, musicisti, tecnici, collaboratori</p>
     </div>
     <span class="admin-count"><?= count($people) ?> profili</span>
   </a>

@@ -104,12 +104,16 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 }
 
 $thumb = data_asset($person["fotoThumb"] ?: $person["foto"]);
+$neighbors = $editing ? admin_list_neighbors($people, $person["id"]) : null;
 
 ob_start();
 ?>
 <a class="admin-back" href="compagnia.php">← Persone</a>
 <p class="admin-kicker">Compagnia</p>
 <h1 class="admin-title"><?= $editing ? admin_h($person["nome"] ?: "Modifica") : "Nuova persona" ?></h1>
+<?php if ($neighbors) {
+    echo admin_pager("persona.php", $neighbors, "nome");
+} ?>
 <form class="admin-form" method="post" enctype="multipart/form-data">
   <?= admin_csrf_field() ?>
   <?php if ($editing) { ?>

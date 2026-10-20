@@ -59,8 +59,17 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         exit;
     }
 
-    $id = (string) ($_POST["id"] ?? "");
     $people = data_people(true);
+
+    if ($action === "hide_all" || $action === "show_all") {
+        $people = admin_set_all_hidden($people, $action === "hide_all");
+        data_write("compagnia", ["people" => $people]);
+        admin_flash("success", $action === "hide_all" ? "Tutte le persone sono nascoste." : "Tutte le persone sono visibili.");
+        header("Location: compagnia.php");
+        exit;
+    }
+
+    $id = (string) ($_POST["id"] ?? "");
     $index = null;
     foreach ($people as $i => $person) {
         if (($person["id"] ?? "") === $id) {
@@ -108,6 +117,9 @@ ob_start();
     <h1 class="admin-title">Persone</h1>
   </div>
   <div class="admin-toolbar__actions">
+    <?php if ($people) { ?>
+      <?= admin_bulk_visibility_forms() ?>
+    <?php } ?>
     <?php if ($inboxCount > 0) { ?>
       <form method="post">
         <?= admin_csrf_field() ?>

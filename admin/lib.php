@@ -274,6 +274,70 @@ function admin_layout($title, $body, $options = []) {
     echo "</body></html>";
 }
 
+function admin_list_neighbors(array $items, $id) {
+    $list = array_values($items);
+    $index = null;
+    foreach ($list as $i => $item) {
+        if (($item["id"] ?? "") === $id) {
+            $index = $i;
+            break;
+        }
+    }
+    if ($index === null) {
+        return ["prev" => null, "next" => null, "index" => null, "total" => count($list)];
+    }
+    return [
+        "prev" => $index > 0 ? $list[$index - 1] : null,
+        "next" => $index < count($list) - 1 ? $list[$index + 1] : null,
+        "index" => $index,
+        "total" => count($list),
+    ];
+}
+
+function admin_pager($baseUrl, array $neighbors, $labelKey = "nome") {
+    $prev = $neighbors["prev"] ?? null;
+    $next = $neighbors["next"] ?? null;
+    if (!$prev && !$next) {
+        return "";
+    }
+
+    $index = $neighbors["index"] ?? null;
+    $total = (int) ($neighbors["total"] ?? 0);
+    $counter = ($index !== null && $total > 0)
+        ? '<span class="admin-pager__count">' . admin_h(($index + 1) . " / " . $total) . "</span>"
+        : "";
+
+    $prevHtml = $prev
+        ? '<a class="admin-pager__link" href="' . admin_h($baseUrl . "?id=" . rawurlencode($prev["id"])) . '" title="' . admin_h($prev[$labelKey] ?? $prev["id"]) . '">← ' . admin_h($prev[$labelKey] ?? "Precedente") . "</a>"
+        : '<span class="admin-pager__link is-disabled">← Precedente</span>';
+    $nextHtml = $next
+        ? '<a class="admin-pager__link" href="' . admin_h($baseUrl . "?id=" . rawurlencode($next["id"])) . '" title="' . admin_h($next[$labelKey] ?? $next["id"]) . '">' . admin_h($next[$labelKey] ?? "Successivo") . " →</a>"
+        : '<span class="admin-pager__link is-disabled">Successivo →</span>';
+
+    return '<nav class="admin-pager" aria-label="Navigazione elenco">' . $prevHtml . $counter . $nextHtml . "</nav>";
+}
+
+function admin_bulk_visibility_forms() {
+    $html = '<form method="post">';
+    $html .= admin_csrf_field();
+    $html .= '<input type="hidden" name="action" value="show_all">';
+    $html .= '<button class="admin-btn-ghost" type="submit" data-confirm="Mostrare tutti gli elementi di questa categoria sul sito?">Mostra tutti</button>';
+    $html .= "</form>";
+    $html .= '<form method="post">';
+    $html .= admin_csrf_field();
+    $html .= '<input type="hidden" name="action" value="hide_all">';
+    $html .= '<button class="admin-btn-ghost" type="submit" data-confirm="Nascondere tutti gli elementi di questa categoria dal sito?">Nascondi tutti</button>';
+    $html .= "</form>";
+    return $html;
+}
+
+function admin_set_all_hidden(array $items, $hidden) {
+    foreach ($items as $i => $item) {
+        $items[$i]["hidden"] = (bool) $hidden;
+    }
+    return array_values($items);
+}
+
 function admin_people_used_in($personId) {
     $titles = [];
     foreach (data_shows(true) as $show) {

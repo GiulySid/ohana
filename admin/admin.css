@@ -189,6 +189,40 @@ button, input, textarea, select { font: inherit; color: inherit; }
 .admin-flash--success { border-color: var(--red); }
 .admin-flash--error { color: #ffb4b8; border-color: var(--red); }
 .admin-back { color: var(--muted); display: inline-block; margin-bottom: 1rem; }
+
+.admin-pager {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+  margin: 0 0 1.4rem;
+  padding: 0.75rem 0;
+  border-top: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+}
+
+.admin-pager__link {
+  flex: 1 1 0;
+  color: var(--muted);
+  font-size: 0.78rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.admin-pager__link:last-child { text-align: right; }
+.admin-pager__link:hover:not(.is-disabled) { color: var(--fg); }
+.admin-pager__link.is-disabled { opacity: 0.35; pointer-events: none; }
+.admin-pager__count {
+  flex: 0 0 auto;
+  color: var(--red);
+  font-size: 0.72rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
 .admin-auth { min-height: 100svh; display: grid; place-items: center; padding: 2rem; }
 .admin-auth__card { width: min(26rem, 100%); }
 .admin-help { color: var(--muted); font-size: 0.85rem; }

@@ -28,6 +28,34 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     admin_csrf_check();
     $action = (string) ($_POST["action"] ?? "save");
 
+    if ($action === "hide_all" || $action === "show_all") {
+        $items = admin_set_all_hidden($items, $action === "hide_all");
+        data_write("media", ["items" => $items]);
+        admin_flash("success", $action === "hide_all" ? "Tutti i media sono nascosti." : "Tutti i media sono visibili.");
+        header("Location: media.php");
+        exit;
+    }
+
+    if ($action === "hide" || $action === "show") {
+        $targetId = trim((string) ($_POST["id"] ?? ""));
+        $found = false;
+        foreach ($items as $i => $row) {
+            if (($row["id"] ?? "") === $targetId) {
+                $items[$i]["hidden"] = $action === "hide";
+                $found = true;
+                break;
+            }
+        }
+        if ($found) {
+            data_write("media", ["items" => array_values($items)]);
+            admin_flash("success", $action === "hide" ? "Nascosto dal sito." : "Di nuovo visibile.");
+        } else {
+            admin_flash("error", "Elemento media non trovato.");
+        }
+        header("Location: media.php");
+        exit;
+    }
+
     if ($action === "delete") {
         $keep = [];
         foreach ($items as $row) {
@@ -134,6 +162,8 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     }
 }
 
+$neighbors = $editing ? admin_list_neighbors($items, $item["id"]) : null;
+
 ob_start();
 ?>
 <a class="admin-back" href="index.php">← Contenuti</a>
@@ -142,20 +172,37 @@ ob_start();
     <p class="admin-kicker">Media</p>
     <h1 class="admin-title"><?= $editing ? "Modifica" : "Foto e video" ?></h1>
   </div>
-  <?php if ($editing) { ?>
-    <a class="admin-btn-ghost" href="media.php">Nuovo</a>
-  <?php } ?>
+  <div class="admin-toolbar__actions">
+    <?php if ($items) { ?>
+      <?= admin_bulk_visibility_forms() ?>
+    <?php } ?>
+    <?php if ($editing) { ?>
+      <a class="admin-btn-ghost" href="media.php">Nuovo</a>
+    <?php } ?>
+  </div>
 </div>
 
-<?php foreach (data_media_items(true) as $row) { ?>
+<?php foreach ($items as $row) { ?>
   <article class="admin-item">
     <div>
       <h2><?= admin_h($row["titolo"] ?? $row["id"]) ?><?php if (!empty($row["hidden"])) { ?> <span class="admin-badge">Nascosto</span><?php } ?></h2>
       <p><?= ($row["tipo"] ?? "") === "gallery" ? "Gallery" : "YouTube" ?></p>
     </div>
-    <a class="admin-btn-ghost" href="media.php?id=<?= admin_h($row["id"]) ?>">Modifica</a>
+    <div class="admin-item__actions">
+      <a class="admin-btn-ghost" href="media.php?id=<?= admin_h($row["id"]) ?>">Modifica</a>
+      <form method="post">
+        <?= admin_csrf_field() ?>
+        <input type="hidden" name="id" value="<?= admin_h($row["id"]) ?>">
+        <input type="hidden" name="action" value="<?= !empty($row["hidden"]) ? "show" : "hide" ?>">
+        <button class="admin-btn-ghost" type="submit"><?= !empty($row["hidden"]) ? "Mostra" : "Nascondi" ?></button>
+      </form>
+    </div>
   </article>
 <?php } ?>
+
+<?php if ($neighbors) {
+    echo admin_pager("media.php", $neighbors, "titolo");
+} ?>
 
 <form class="admin-form" method="post" enctype="multipart/form-data" style="margin-top:2rem">
   <?= admin_csrf_field() ?>

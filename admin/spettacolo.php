@@ -161,12 +161,16 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
 $poster = data_asset($show["locandinaThumb"] ?: $show["locandina"]);
 $optionsEmpty = admin_person_options($people);
+$neighbors = $editing ? admin_list_neighbors($shows, $show["id"]) : null;
 
 ob_start();
 ?>
 <a class="admin-back" href="spettacoli.php">← Spettacoli</a>
 <p class="admin-kicker">Palco</p>
 <h1 class="admin-title"><?= $editing ? admin_h($show["titolo"] ?: "Modifica") : "Nuovo spettacolo" ?></h1>
+<?php if ($neighbors) {
+    echo admin_pager("spettacolo.php", $neighbors, "titolo");
+} ?>
 <form class="admin-form" method="post" enctype="multipart/form-data">
   <?= admin_csrf_field() ?>
   <?php if ($editing) { ?>
