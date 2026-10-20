@@ -1,106 +1,169 @@
 {
     "shows": [
         {
-            "id": "stelle-in-tasca",
+            "id": "shrek-musical",
             "titolo": "SHREK - Il Musical",
-            "stagione": "2026/2027",
+            "stagione": "2026/2028",
             "anno": 2027,
             "stato": "prossimo",
-            "sinossi": "Un’avventura teatrale piena di ironia sta per prendere vita.\r\n\r\nPreparati a rivivere la magia del mondo di Shrek come non l’hai mai visto prima.\r\n\r\nIl debutto ufficiale è fissato per il 2027.\r\nSeguici per saperne di più!",
-            "locandina": "media/spettacoli/stelle-in-tasca/stelle-in-tasca-locandina.webp",
-            "locandinaThumb": "media/spettacoli/stelle-in-tasca/thumbs/stelle-in-tasca-locandina.webp",
+            "sinossi": "Un’avventura teatrale piena di ironia sta per prendere vita.\r\n\r\nPreparati a rivivere la magia del mondo di Shrek come non l’hai mai visto prima.\r\n\r\nIl debutto ufficiale è fissato per il 30 Maggio 2027.\r\nSeguici per saperne di più!",
+            "locandina": "media/spettacoli/shrek-musical/shrek-musical-locandina.webp",
+            "locandinaThumb": "media/spettacoli/shrek-musical/thumbs/shrek-musical-locandina.webp",
             "trailerYoutube": "",
-            "repliche": [],
-            "cast": [
+            "repliche": [
                 {
-                    "personId": "elena-martini",
-                    "ruoloInScena": "Lead"
-                },
-                {
-                    "personId": "luca-bianchi",
-                    "ruoloInScena": "Lead"
-                },
-                {
-                    "personId": "sofia-riva",
-                    "ruoloInScena": ""
-                },
-                {
-                    "personId": "anna-ferri",
-                    "ruoloInScena": ""
-                },
-                {
-                    "personId": "tommaso-ricci",
-                    "ruoloInScena": ""
-                },
-                {
-                    "personId": "valentina-fontana",
-                    "ruoloInScena": ""
-                },
-                {
-                    "personId": "federico-bruno",
-                    "ruoloInScena": ""
-                },
-                {
-                    "personId": "anna-ferri",
-                    "ruoloInScena": ""
-                },
-                {
-                    "personId": "sofia-riva",
-                    "ruoloInScena": ""
+                    "data": "2027-05-30",
+                    "ora": "17:00",
+                    "luogo": "Cineteatro Edelweiss",
+                    "citta": "Besana in Brianza (MB)",
+                    "biglietti": ""
                 }
             ],
-            "staff": [
-                {
-                    "personId": "sofia-riva",
-                    "credito": "Regia"
-                },
-                {
-                    "personId": "marco-conti",
-                    "credito": "Luci e suono"
-                }
-            ],
+            "cast": [],
+            "staff": [],
             "gallery": [],
             "hidden": false
         },
         {
-            "id": "la-famiglia-che-canta",
+            "id": "greatest-show",
             "titolo": "The Greatest Show",
-            "stagione": "2025/2026",
+            "stagione": "2024/2026",
             "anno": 2025,
             "stato": "archivio",
-            "sinossi": "Il musical The Greatest Show ha acceso il nostro palco tra energia, coreografie e applausi a scena aperta.\r\nGrazie a Ohana Musical Company e a tutti voi!",
-            "locandina": "media/spettacoli/la-famiglia-che-canta/la-famiglia-che-canta-locandina.webp",
-            "locandinaThumb": "media/spettacoli/la-famiglia-che-canta/thumbs/la-famiglia-che-canta-locandina.webp",
-            "trailerYoutube": "",
+            "sinossi": "“The Greatest Show\" è il musical basato sul celebre film “The Greatest Showman”, ispirato alla vita di Phineas Taylor Barnum, un visionario che ha rivoluzionato il mondo dello spettacolo creando il famoso Circo Barnum, primo nel suo genere.\r\n\r\nP.T. Barnum è figlio di un umile sarto nell’America dell’Ottocento. Sogna un mondo dove avere successo, il pubblico ai suoi piedi e poter sposare Charity Hallet, una giovane ricca di famiglia.\r\nI due giovani, nonostante le difficoltà e le differenze sociali, crescono mantenendo il loro legame e coltivando l’amore l’uno per l’altra.\r\nIl sogno di Barnum ha inizio con il “Museo delle Stranezze” dove vedere cose mai viste prima, ma sa che non bastano le sue doti d’intrattenitore ad attrarre il pubblico. \r\nRecluta così, ad esibirsi nei suoi spettacoli, un gruppo di individui unici e talentuosi con le loro “stranezze” e che altri chiamerebbero solo “fenomeni da baraccone”: un nano, una donna barbuta, un gigante irlandese, un uomo tatuato, un uomo lupo, una coppia di trapezisti. Emarginati e disprezzati dai più, che lui tratta invece con umanità e dignità. \r\nNasce così il “Barnum Circus”, che attira un pubblico sempre crescente, nonostante i detrattori e le pessime critiche sui giornali. \r\nCon l’aiuto del giovane ereditiere Phillip Carlyle e della famosa cantante svedese Jenny Lind, Barnum attrae anche il pubblico più sofisticato e snob ed è finalmente travolto da un successo senza precedenti, ma il percorso per affermarsi sarà lungo e tortuoso e lo porterà a mettere a rischio la cosa a lui più cara, la famiglia.\r\n\r\n\"The Greatest Show\" è un'esplosione di colori, musica e danza, con coreografie mozzafiato e una colonna sonora coinvolgente suonata interamente dal vivo ed esplora temi come l'inclusione, l'accettazione e la ricerca della felicità, celebrando il potere della creatività e della perseveranza.",
+            "locandina": "media/spettacoli/greatest-show/greatest-show-locandina.webp",
+            "locandinaThumb": "media/spettacoli/greatest-show/thumbs/greatest-show-locandina.webp",
+            "trailerYoutube": "https://www.youtube.com/watch?v=vpVpgzUdXSs&t=3s",
             "repliche": [
                 {
-                    "data": "2022-11-12",
+                    "data": "2024-05-04",
+                    "ora": "21:00",
+                    "luogo": "Cineteatro Edelweiss",
+                    "citta": "Besana in Brianza (MB)",
+                    "biglietti": ""
+                },
+                {
+                    "data": "2024-05-18",
+                    "ora": "21:00",
+                    "luogo": "Cineteatro Edelweiss",
+                    "citta": "Besana in Brianza (MB)",
+                    "biglietti": ""
+                },
+                {
+                    "data": "2024-05-19",
+                    "ora": "21:00",
+                    "luogo": "Cineteatro Edelweiss",
+                    "citta": "Besana in Brianza (MB)",
+                    "biglietti": ""
+                },
+                {
+                    "data": "2024-06-02",
+                    "ora": "18:00",
+                    "luogo": "Cineteatro Edelweiss",
+                    "citta": "Besana in Brianza (MB)",
+                    "biglietti": ""
+                },
+                {
+                    "data": "2024-06-29",
+                    "ora": "16:00",
+                    "luogo": "Festival Internazionale,  Parco Villa Filippini",
+                    "citta": "Besana in Brianza (MB)",
+                    "biglietti": ""
+                },
+                {
+                    "data": "2024-09-22",
+                    "ora": "16:00",
+                    "luogo": "Cineteatro Edelweiss",
+                    "citta": "Besana in Brianza (MB)",
+                    "biglietti": ""
+                },
+                {
+                    "data": "2024-10-25",
+                    "ora": "21:00",
+                    "luogo": "Cineteatro Sant'Angelo",
+                    "citta": "Lentate sul Seveso (MB)",
+                    "biglietti": ""
+                },
+                {
+                    "data": "2024-11-30",
+                    "ora": "21:00",
+                    "luogo": "Teatro Agorà",
+                    "citta": "Carnago (VA)",
+                    "biglietti": ""
+                },
+                {
+                    "data": "2025-02-09",
+                    "ora": "17:00",
+                    "luogo": "Teatro San Carlo",
+                    "citta": "Sirone (LC)",
+                    "biglietti": ""
+                },
+                {
+                    "data": "2025-02-16",
+                    "ora": "16:00",
+                    "luogo": "Teatro Sala della Comunità",
+                    "citta": "Lomagna (LC)",
+                    "biglietti": ""
+                },
+                {
+                    "data": "2025-04-05",
+                    "ora": "21:00",
+                    "luogo": "Teatro Don Caccia",
+                    "citta": "Giussano (MB)",
+                    "biglietti": ""
+                },
+                {
+                    "data": "2025-05-24",
                     "ora": "21:00",
                     "luogo": "Auditorium",
-                    "citta": "",
+                    "citta": "Casatenovo (LC)",
+                    "biglietti": ""
+                },
+                {
+                    "data": "2025-10-18",
+                    "ora": "21:00",
+                    "luogo": "Cineteatro Santa Maria",
+                    "citta": "Biassono (MB)",
+                    "biglietti": ""
+                },
+                {
+                    "data": "2025-10-19",
+                    "ora": "16:30",
+                    "luogo": "Cineteatro Santa Maria",
+                    "citta": "Biassono (MB)",
+                    "biglietti": ""
+                },
+                {
+                    "data": "2025-11-30",
+                    "ora": "16:00",
+                    "luogo": "Cineteatro L'Agorà",
+                    "citta": "Carate Brianza (MB)",
+                    "biglietti": ""
+                },
+                {
+                    "data": "2025-12-13",
+                    "ora": "21:00",
+                    "luogo": "Teatro San Luigi",
+                    "citta": "Carugo (CO)",
+                    "biglietti": ""
+                },
+                {
+                    "data": "2026-01-10",
+                    "ora": "21:00",
+                    "luogo": "Teatro Smeraldo",
+                    "citta": "Airuno (LC)",
+                    "biglietti": ""
+                },
+                {
+                    "data": "2026-03-28",
+                    "ora": "21:00",
+                    "luogo": "Cineteatro Edelweiss",
+                    "citta": "Besana in Brianza (MB)",
                     "biglietti": ""
                 }
             ],
-            "cast": [
-                {
-                    "personId": "davide-serra",
-                    "ruoloInScena": "Ensemble"
-                },
-                {
-                    "personId": "elena-martini",
-                    "ruoloInScena": "Ensemble"
-                }
-            ],
-            "staff": [
-                {
-                    "personId": "sofia-riva",
-                    "credito": "Regia"
-                },
-                {
-                    "personId": "marco-conti",
-                    "credito": "Tecnica"
-                }
-            ],
+            "cast": [],
+            "staff": [],
             "gallery": [],
             "hidden": false
         }

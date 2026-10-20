@@ -1,180 +1,438 @@
 {
-  "people": [
-    {
-      "id": "elena-martini",
-      "nome": "Elena Martini",
-      "ruoli": ["attore"],
-      "attivoDal": "2018",
-      "attivoAl": "",
-      "bio": "Soprano e attrice. In compagnia dalle origini, ama i ruoli che tengono insieme ironia e canto.",
-      "foto": "",
-      "fotoThumb": "",
-      "hidden": false
-    },
-    {
-      "id": "luca-bianchi",
-      "nome": "Luca Bianchi",
-      "ruoli": ["attore"],
-      "attivoDal": "2020",
-      "attivoAl": "",
-      "bio": "Voce e movimento. Arriva dal teatro di prosa e dal palco non se n’è più andato.",
-      "foto": "",
-      "fotoThumb": "",
-      "hidden": false
-    },
-    {
-      "id": "sofia-riva",
-      "nome": "Sofia Riva",
-      "ruoli": ["regista"],
-      "attivoDal": "2016",
-      "attivoAl": "",
-      "bio": "Regia e drammaturgia. Tiene insieme il cast come si tiene un ensemble: ascoltando.",
-      "foto": "",
-      "fotoThumb": "",
-      "hidden": false
-    },
-    {
-      "id": "marco-conti",
-      "nome": "Marco Conti",
-      "ruoli": ["tecnico"],
-      "attivoDal": "2019",
-      "attivoAl": "",
-      "bio": "Luci e suono. Se lo spot è nel posto giusto, è quasi sempre colpa sua.",
-      "foto": "",
-      "fotoThumb": "",
-      "hidden": false
-    },
-    {
-      "id": "chiara-leoni",
-      "nome": "Chiara Leoni",
-      "ruoli": ["collaboratore"],
-      "attivoDal": "2017",
-      "attivoAl": "2023",
-      "bio": "Costumi e organizzazione. Ha cucito più di un mondo in questo palco.",
-      "foto": "",
-      "fotoThumb": "",
-      "hidden": false
-    },
-    {
-      "id": "davide-serra",
-      "nome": "Davide Serra",
-      "ruoli": ["attore", "tecnico"],
-      "attivoDal": "2015",
-      "attivoAl": "2021",
-      "bio": "In scena e dietro le quinte. Un piede sul palco, l’altro al mixer.",
-      "foto": "",
-      "fotoThumb": "",
-      "hidden": false
-    },
-    {
-      "id": "anna-ferri",
-      "nome": "Anna Ferri",
-      "ruoli": ["attore"],
-      "attivoDal": "2021",
-      "attivoAl": "",
-      "bio": "Placeholder compagnia.",
-      "foto": "",
-      "fotoThumb": "",
-      "hidden": false
-    },
-    {
-      "id": "paolo-gallo",
-      "nome": "Paolo Gallo",
-      "ruoli": ["attore"],
-      "attivoDal": "2019",
-      "attivoAl": "",
-      "bio": "Placeholder compagnia.",
-      "foto": "",
-      "fotoThumb": "",
-      "hidden": false
-    },
-    {
-      "id": "giulia-neri",
-      "nome": "Giulia Neri",
-      "ruoli": ["regista"],
-      "attivoDal": "2022",
-      "attivoAl": "",
-      "bio": "Placeholder compagnia.",
-      "foto": "",
-      "fotoThumb": "",
-      "hidden": false
-    },
-    {
-      "id": "andrea-costa",
-      "nome": "Andrea Costa",
-      "ruoli": ["tecnico"],
-      "attivoDal": "2020",
-      "attivoAl": "",
-      "bio": "Placeholder compagnia.",
-      "foto": "",
-      "fotoThumb": "",
-      "hidden": false
-    },
-    {
-      "id": "marta-villa",
-      "nome": "Marta Villa",
-      "ruoli": ["attore"],
-      "attivoDal": "2018",
-      "attivoAl": "",
-      "bio": "Placeholder compagnia.",
-      "foto": "",
-      "fotoThumb": "",
-      "hidden": false
-    },
-    {
-      "id": "federico-bruno",
-      "nome": "Federico Bruno",
-      "ruoli": ["tecnico"],
-      "attivoDal": "2023",
-      "attivoAl": "",
-      "bio": "Placeholder compagnia.",
-      "foto": "",
-      "fotoThumb": "",
-      "hidden": false
-    },
-    {
-      "id": "irene-sarti",
-      "nome": "Irene Sarti",
-      "ruoli": ["collaboratore"],
-      "attivoDal": "2021",
-      "attivoAl": "",
-      "bio": "Placeholder compagnia.",
-      "foto": "",
-      "fotoThumb": "",
-      "hidden": false
-    },
-    {
-      "id": "tommaso-ricci",
-      "nome": "Tommaso Ricci",
-      "ruoli": ["attore"],
-      "attivoDal": "2017",
-      "attivoAl": "",
-      "bio": "Placeholder compagnia.",
-      "foto": "",
-      "fotoThumb": "",
-      "hidden": false
-    },
-    {
-      "id": "valentina-fontana",
-      "nome": "Valentina Fontana",
-      "ruoli": ["attore"],
-      "attivoDal": "2016",
-      "attivoAl": "2022",
-      "bio": "Placeholder compagnia.",
-      "foto": "",
-      "fotoThumb": "",
-      "hidden": false
-    },
-    {
-      "id": "nicola-greco",
-      "nome": "Nicola Greco",
-      "ruoli": ["tecnico"],
-      "attivoDal": "2014",
-      "attivoAl": "2020",
-      "bio": "Placeholder compagnia.",
-      "foto": "",
-      "fotoThumb": "",
-      "hidden": false
-    }
-  ]
+    "people": [
+        {
+            "id": "sofia-riva",
+            "nome": "Sofia Riva",
+            "soprannome": "Sofy",
+            "pronomi": "Lei",
+            "ruoli": [
+                "attore"
+            ],
+            "attivoDal": "2022",
+            "attivoAl": "",
+            "bio": "",
+            "foto": "media/compagnia/sofia-riva.jpg",
+            "fotoThumb": "media/compagnia/thumbs/sofia-riva.jpg",
+            "hidden": false
+        },
+        {
+            "id": "daniela-radaelli",
+            "nome": "Daniela Radaelli",
+            "soprannome": "Dani",
+            "pronomi": "",
+            "ruoli": [
+                "attore"
+            ],
+            "attivoDal": "2022",
+            "attivoAl": "",
+            "bio": "",
+            "foto": "media/compagnia/daniela-radaelli.jpg",
+            "fotoThumb": "media/compagnia/thumbs/daniela-radaelli.jpg",
+            "hidden": false
+        },
+        {
+            "id": "gioele-marcello",
+            "nome": "Gioele Marcello",
+            "soprannome": "Gio",
+            "pronomi": "He/him",
+            "ruoli": [
+                "attore"
+            ],
+            "attivoDal": "2026",
+            "attivoAl": "",
+            "bio": "",
+            "foto": "media/compagnia/gioele-marcello.jpg",
+            "fotoThumb": "media/compagnia/thumbs/gioele-marcello.jpg",
+            "hidden": false
+        },
+        {
+            "id": "giulia-binda",
+            "nome": "Giulia Binda",
+            "soprannome": "Giuli",
+            "pronomi": "She/her",
+            "ruoli": [
+                "attore"
+            ],
+            "attivoDal": "2025",
+            "attivoAl": "",
+            "bio": "",
+            "foto": "media/compagnia/giulia-binda.jpg",
+            "fotoThumb": "media/compagnia/thumbs/giulia-binda.jpg",
+            "hidden": false
+        },
+        {
+            "id": "anna-maria-gasbarre",
+            "nome": "Anna Maria Gasbarre",
+            "soprannome": "Nina",
+            "pronomi": "Lei",
+            "ruoli": [
+                "attore",
+                "collaboratore"
+            ],
+            "attivoDal": "",
+            "attivoAl": "",
+            "bio": "",
+            "foto": "",
+            "fotoThumb": "",
+            "hidden": false
+        },
+        {
+            "id": "lorenzo-ziliani",
+            "nome": "Lorenzo Ziliani",
+            "soprannome": "LolloZillo",
+            "pronomi": "",
+            "ruoli": [
+                "tecnico"
+            ],
+            "attivoDal": "2025",
+            "attivoAl": "",
+            "bio": "",
+            "foto": "",
+            "fotoThumb": "",
+            "hidden": false
+        },
+        {
+            "id": "marco-chiappa",
+            "nome": "Marco Chiappa",
+            "soprannome": "marquino",
+            "pronomi": "Lui",
+            "ruoli": [
+                "tecnico"
+            ],
+            "attivoDal": "2024",
+            "attivoAl": "",
+            "bio": "",
+            "foto": "",
+            "fotoThumb": "",
+            "hidden": false
+        },
+        {
+            "id": "matteo-cazzaniga",
+            "nome": "Matteo Cazzaniga",
+            "soprannome": "Teo",
+            "pronomi": "Lui",
+            "ruoli": [
+                "tecnico"
+            ],
+            "attivoDal": "2020",
+            "attivoAl": "",
+            "bio": "",
+            "foto": "",
+            "fotoThumb": "",
+            "hidden": false
+        },
+        {
+            "id": "letizia-riva",
+            "nome": "Letizia Riva",
+            "soprannome": "",
+            "pronomi": "",
+            "ruoli": [
+                "attore"
+            ],
+            "attivoDal": "",
+            "attivoAl": "",
+            "bio": "",
+            "foto": "media/compagnia/letizia-riva.jpg",
+            "fotoThumb": "media/compagnia/thumbs/letizia-riva.jpg",
+            "hidden": false
+        },
+        {
+            "id": "giovanni-sala",
+            "nome": "Giovanni Sala",
+            "soprannome": "GioAle",
+            "pronomi": "He/him",
+            "ruoli": [
+                "attore"
+            ],
+            "attivoDal": "2025",
+            "attivoAl": "",
+            "bio": "Ho la passione per la recitazione dalle medie, ho avuto una compagnia teatrale nel periodo delle superiori e ho frequentato un'accademia di spettacolo (recitazione, musica, modeling, foto e video) a Milano: Scuola Mohole.\r\nSono inoltre un cantante e cantautore indipendente con lo pseudonimo di Zvanî! \r\n\r\nAll'interno di Ohana Musical Company ho recitato nei panni di Phillip Carlyle in The Greatest Show.",
+            "foto": "media/compagnia/giovanni-sala.jpg",
+            "fotoThumb": "media/compagnia/thumbs/giovanni-sala.jpg",
+            "hidden": false
+        },
+        {
+            "id": "jacopo-samuele-beretta",
+            "nome": "Jacopo Samuele Beretta",
+            "soprannome": "Berry",
+            "pronomi": "Lui",
+            "ruoli": [
+                "attore"
+            ],
+            "attivoDal": "2025",
+            "attivoAl": "",
+            "bio": "non so recitare, improvvisare, cantare, ballare e/o niente che riguarda artistico MA.... faccio ridere",
+            "foto": "media/compagnia/jacopo-samuele-beretta.jpg",
+            "fotoThumb": "media/compagnia/thumbs/jacopo-samuele-beretta.jpg",
+            "hidden": false
+        },
+        {
+            "id": "maria-chiara-gasbarre",
+            "nome": "Maria Chiara Gasbarre",
+            "soprannome": "Chiaris",
+            "pronomi": "",
+            "ruoli": [
+                "attore",
+                "collaboratore"
+            ],
+            "attivoDal": "",
+            "attivoAl": "",
+            "bio": "",
+            "foto": "media/compagnia/maria-chiara-gasbarre.jpg",
+            "fotoThumb": "media/compagnia/thumbs/maria-chiara-gasbarre.jpg",
+            "hidden": true
+        },
+        {
+            "id": "maddalena-ziliani",
+            "nome": "Maddalena Ziliani",
+            "soprannome": "Maddy",
+            "pronomi": "Lei",
+            "ruoli": [
+                "attore"
+            ],
+            "attivoDal": "2023",
+            "attivoAl": "",
+            "bio": "",
+            "foto": "media/compagnia/maddalena-ziliani.jpg",
+            "fotoThumb": "media/compagnia/thumbs/maddalena-ziliani.jpg",
+            "hidden": true
+        },
+        {
+            "id": "alessio-franco",
+            "nome": "Alessio Franco",
+            "soprannome": "Frank",
+            "pronomi": "lui",
+            "ruoli": [
+                "attore",
+                "tecnico"
+            ],
+            "attivoDal": "2023",
+            "attivoAl": "",
+            "bio": "Quando non sono in scena sono il microfonaio della compagnia: metto i microfoni in testa alla gente e mi assicuro che non ci sputino dentro ; )",
+            "foto": "media/compagnia/alessio-franco.jpg",
+            "fotoThumb": "media/compagnia/thumbs/alessio-franco.jpg",
+            "hidden": true
+        },
+        {
+            "id": "alessio-franco-2",
+            "nome": "Alessio Franco",
+            "soprannome": "Frank",
+            "pronomi": "lui",
+            "ruoli": [
+                "attore",
+                "tecnico"
+            ],
+            "attivoDal": "2023",
+            "attivoAl": "",
+            "bio": "​Quando non sono in scena faccio il microfonaio: lego gli archetti in testa ai cantanti e mi assicuro che siano nella posizione giusta. Se il microfono si sposta piombo in picchiata come un falco pellegrino per raddrizzarlo prima che si sentano gli sputi.",
+            "foto": "media/compagnia/alessio-franco-2.jpg",
+            "fotoThumb": "media/compagnia/thumbs/alessio-franco-2.jpg",
+            "hidden": true
+        },
+        {
+            "id": "letizia-mandelli",
+            "nome": "Letizia Mandelli",
+            "soprannome": "Leti",
+            "pronomi": "Lei",
+            "ruoli": [
+                "attore"
+            ],
+            "attivoDal": "2023",
+            "attivoAl": "",
+            "bio": "",
+            "foto": "media/compagnia/letizia-mandelli.jpg",
+            "fotoThumb": "media/compagnia/thumbs/letizia-mandelli.jpg",
+            "hidden": true
+        },
+        {
+            "id": "davide-villa",
+            "nome": "Davide Villa",
+            "soprannome": "Dado(ne Papone)",
+            "pronomi": "Lui",
+            "ruoli": [
+                "regista"
+            ],
+            "attivoDal": "2022",
+            "attivoAl": "",
+            "bio": "",
+            "foto": "media/compagnia/davide-villa.jpg",
+            "fotoThumb": "media/compagnia/thumbs/davide-villa.jpg",
+            "hidden": true
+        },
+        {
+            "id": "charlie-baccaglini",
+            "nome": "Charlie Baccaglini",
+            "soprannome": "Charlie",
+            "pronomi": "",
+            "ruoli": [
+                "attore"
+            ],
+            "attivoDal": "2025",
+            "attivoAl": "",
+            "bio": "Sono uno studente di pittura e un grande amante dell'arte in tutte le sue forme,  credo fermamente che il musical riesca ad unirle al meglio. Con Ohana provo goffamente a cimentarmi nel ballo, nel canto e nella recitazione sperando di riuscire ad esprimere anche solo in parte il divertimento che provo facendolo.",
+            "foto": "media/compagnia/charlie-baccaglini.jpg",
+            "fotoThumb": "media/compagnia/thumbs/charlie-baccaglini.jpg",
+            "hidden": true
+        },
+        {
+            "id": "giovanni-giussani",
+            "nome": "Giovanni Giussani",
+            "soprannome": "Gio",
+            "pronomi": "",
+            "ruoli": [
+                "attore"
+            ],
+            "attivoDal": "2022",
+            "attivoAl": "2026",
+            "bio": "Sono Giovanni, sono uno studente all’ultimo anno del corso di laurea in Giurisprudenza. Ho fatto parte di Ohana sin dalla sua costituzione, nel 2022, fino a poco tempo fa (marzo 2026). Ho preso parte al primo grande progetto della compagnia, The Greatest Show, interpretando il ruolo di W.D. Wheeler, circense e fratello di Anne Wheeler (Anna Bassignani). Dal 2025 al 2026 ho iniziato lo studio del canto presso Asd Voice Lab.",
+            "foto": "",
+            "fotoThumb": "",
+            "hidden": true
+        },
+        {
+            "id": "matilde-giudici",
+            "nome": "Matilde Giudici",
+            "soprannome": "Mati",
+            "pronomi": "",
+            "ruoli": [
+                "attore"
+            ],
+            "attivoDal": "",
+            "attivoAl": "",
+            "bio": "",
+            "foto": "media/compagnia/matilde-giudici.jpg",
+            "fotoThumb": "media/compagnia/thumbs/matilde-giudici.jpg",
+            "hidden": true
+        },
+        {
+            "id": "alice-negri",
+            "nome": "Alice Negri",
+            "soprannome": "",
+            "pronomi": "",
+            "ruoli": [],
+            "attivoDal": "",
+            "attivoAl": "",
+            "bio": "",
+            "foto": "media/compagnia/alice-negri.jpg",
+            "fotoThumb": "media/compagnia/thumbs/alice-negri.jpg",
+            "hidden": false
+        },
+        {
+            "id": "anna-bassignani",
+            "nome": "Anna Bassignani",
+            "soprannome": "",
+            "pronomi": "",
+            "ruoli": [],
+            "attivoDal": "",
+            "attivoAl": "",
+            "bio": "",
+            "foto": "media/compagnia/anna-bassignani.jpg",
+            "fotoThumb": "media/compagnia/thumbs/anna-bassignani.jpg",
+            "hidden": false
+        },
+        {
+            "id": "arianna-tempesti",
+            "nome": "Arianna Tempesti",
+            "soprannome": "",
+            "pronomi": "",
+            "ruoli": [],
+            "attivoDal": "",
+            "attivoAl": "",
+            "bio": "",
+            "foto": "media/compagnia/arianna-tempesti.jpg",
+            "fotoThumb": "media/compagnia/thumbs/arianna-tempesti.jpg",
+            "hidden": false
+        },
+        {
+            "id": "beatrice-de-negri",
+            "nome": "Beatrice De Negri",
+            "soprannome": "",
+            "pronomi": "",
+            "ruoli": [],
+            "attivoDal": "",
+            "attivoAl": "",
+            "bio": "",
+            "foto": "media/compagnia/beatrice-de-negri.jpg",
+            "fotoThumb": "media/compagnia/thumbs/beatrice-de-negri.jpg",
+            "hidden": false
+        },
+        {
+            "id": "carlotta-tironi",
+            "nome": "Carlotta Tironi",
+            "soprannome": "",
+            "pronomi": "",
+            "ruoli": [],
+            "attivoDal": "",
+            "attivoAl": "",
+            "bio": "",
+            "foto": "media/compagnia/carlotta-tironi.jpg",
+            "fotoThumb": "media/compagnia/thumbs/carlotta-tironi.jpg",
+            "hidden": false
+        },
+        {
+            "id": "giulia-vezzoli",
+            "nome": "Giulia Vezzoli",
+            "soprannome": "",
+            "pronomi": "",
+            "ruoli": [],
+            "attivoDal": "",
+            "attivoAl": "",
+            "bio": "",
+            "foto": "media/compagnia/giulia-vezzoli.jpg",
+            "fotoThumb": "media/compagnia/thumbs/giulia-vezzoli.jpg",
+            "hidden": false
+        },
+        {
+            "id": "luca-alfieri",
+            "nome": "Luca Alfieri",
+            "soprannome": "",
+            "pronomi": "",
+            "ruoli": [],
+            "attivoDal": "",
+            "attivoAl": "",
+            "bio": "",
+            "foto": "media/compagnia/luca-alfieri.jpg",
+            "fotoThumb": "media/compagnia/thumbs/luca-alfieri.jpg",
+            "hidden": false
+        },
+        {
+            "id": "luca-de-marchi",
+            "nome": "Luca De Marchi",
+            "soprannome": "",
+            "pronomi": "",
+            "ruoli": [],
+            "attivoDal": "",
+            "attivoAl": "",
+            "bio": "",
+            "foto": "media/compagnia/luca-de-marchi.jpg",
+            "fotoThumb": "media/compagnia/thumbs/luca-de-marchi.jpg",
+            "hidden": false
+        },
+        {
+            "id": "mattia-proserpio-scarcia",
+            "nome": "Mattia Proserpio Scarcia",
+            "soprannome": "",
+            "pronomi": "",
+            "ruoli": [],
+            "attivoDal": "",
+            "attivoAl": "",
+            "bio": "",
+            "foto": "media/compagnia/mattia-proserpio-scarcia.jpg",
+            "fotoThumb": "media/compagnia/thumbs/mattia-proserpio-scarcia.jpg",
+            "hidden": false
+        },
+        {
+            "id": "valeria-negri",
+            "nome": "Valeria Negri",
+            "soprannome": "",
+            "pronomi": "",
+            "ruoli": [],
+            "attivoDal": "",
+            "attivoAl": "",
+            "bio": "",
+            "foto": "media/compagnia/valeria-negri.jpg",
+            "fotoThumb": "media/compagnia/thumbs/valeria-negri.jpg",
+            "hidden": false
+        }
+    ]
 }
