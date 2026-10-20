@@ -35,7 +35,7 @@ if ($editing) {
 }
 
 function admin_person_options($people, $selected = "") {
-    $html = '<option value="">— persona —</option>';
+    $html = '<option value="">· persona ·</option>';
     foreach ($people as $person) {
         $sel = ($person["id"] ?? "") === $selected ? " selected" : "";
         $html .= '<option value="' . admin_h($person["id"]) . '"' . $sel . ">" . admin_h($person["nome"]) . "</option>";

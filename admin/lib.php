@@ -239,7 +239,7 @@ function admin_layout($title, $body, $options = []) {
     echo '<meta charset="UTF-8">';
     echo '<meta name="viewport" content="width=device-width, initial-scale=1.0">';
     echo '<meta name="robots" content="noindex, nofollow">';
-    echo '<title>' . admin_h($title) . " — Ohana Admin</title>";
+    echo '<title>' . admin_h($title) . " · Ohana Admin</title>";
     echo '<link rel="icon" href="../img/brand/favicon.png" type="image/png">';
     echo '<link rel="preconnect" href="https://fonts.googleapis.com">';
     echo '<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>';

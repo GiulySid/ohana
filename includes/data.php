@@ -140,12 +140,12 @@ function data_person_period($person) {
         return "";
     }
     if ($to === "") {
-        return ($from !== "" ? $from : "…") . " — oggi";
+        return ($from !== "" ? $from : "…") . " · oggi";
     }
     if ($from === "") {
         return "fino al " . $to;
     }
-    return $from . " — " . $to;
+    return $from . " · " . $to;
 }
 
 function data_shows($includeHidden = false) {

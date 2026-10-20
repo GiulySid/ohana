@@ -63,7 +63,7 @@ site_header("home", $name, $site["tagline"] ?? "");
         <?php if ($next) { ?>
           <p>
             <?= data_h(data_format_date($next["data"])) ?>
-            <?php if (!empty($next["ora"])) { ?> — <?= data_h($next["ora"]) ?><?php } ?>
+            <?php if (!empty($next["ora"])) { ?> · <?= data_h($next["ora"]) ?><?php } ?>
             <?php if (!empty($next["luogo"]) || !empty($next["citta"])) { ?>
               · <?= data_h(trim(($next["luogo"] ?? "") . (empty($next["citta"]) ? "" : ", " . $next["citta"]), ", ")) ?>
             <?php } ?>

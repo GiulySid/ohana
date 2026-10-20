@@ -53,7 +53,7 @@ site_header("archivio", $show["titolo"], $show["sinossi"] ?: $show["titolo"], $g
             ?>
           <li class="replica">
             <strong><?= data_h(data_format_date($replica["data"] ?? "")) ?></strong>
-            <?php if (!empty($replica["ora"])) { ?> — <?= data_h($replica["ora"]) ?><?php } ?>
+            <?php if (!empty($replica["ora"])) { ?> · <?= data_h($replica["ora"]) ?><?php } ?>
             <?php if ($place !== "") { ?><br><?= data_h($place) ?><?php } ?>
             <?php if (!empty($replica["biglietti"])) { ?>
               <br><a href="<?= data_h($replica["biglietti"]) ?>" target="_blank" rel="noopener noreferrer">Biglietti</a>

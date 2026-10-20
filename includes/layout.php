@@ -43,7 +43,7 @@ function site_show_title_mark($show) {
 function site_header($current, $title, $description = "", $opts = []) {
     $site = data_site();
     $name = $site["nome"] ?: "Ohana Musical Company";
-    $fullTitle = $current === "home" ? $name : ($title . " — " . $name);
+    $fullTitle = $current === "home" ? $name : ($title . " · " . $name);
     $description = $description !== "" ? $description : ($site["tagline"] ?: $name);
     $nav = site_nav_items();
     $guest = trim((string) ($opts["guest"] ?? ""));

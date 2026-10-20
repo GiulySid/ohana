@@ -31,7 +31,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     } elseif ($to === "" || !filter_var($to, FILTER_VALIDATE_EMAIL)) {
         $error = "Il form non è ancora collegato a un’email. Scrivici direttamente.";
     } else {
-        $subject = "Messaggio dal sito Ohana — " . $clean($values["nome"]);
+        $subject = "Messaggio dal sito Ohana · " . $clean($values["nome"]);
         $body = "Nome: " . $values["nome"] . "\nEmail: " . $values["email"] . "\n\n" . $values["messaggio"] . "\n";
         $headers = [
             "From: " . $clean($to),
