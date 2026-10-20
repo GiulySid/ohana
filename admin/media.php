@@ -182,14 +182,18 @@ ob_start();
   </div>
 </div>
 
-<?php foreach ($items as $row) { ?>
+<?php foreach ($items as $row) {
+    $detailHref = "media.php?id=" . rawurlencode((string) $row["id"]);
+    ?>
   <article class="admin-item">
-    <div>
-      <h2><?= admin_h($row["titolo"] ?? $row["id"]) ?><?php if (!empty($row["hidden"])) { ?> <span class="admin-badge">Nascosto</span><?php } ?></h2>
+    <div class="admin-item__body">
+      <h2>
+        <a href="<?= admin_h($detailHref) ?>"><?= admin_h($row["titolo"] ?? $row["id"]) ?></a>
+        <?php if (!empty($row["hidden"])) { ?> <span class="admin-badge">Nascosto</span><?php } ?>
+      </h2>
       <p><?= ($row["tipo"] ?? "") === "gallery" ? "Gallery" : "YouTube" ?></p>
     </div>
     <div class="admin-item__actions">
-      <a class="admin-btn-ghost" href="media.php?id=<?= admin_h($row["id"]) ?>">Modifica</a>
       <form method="post">
         <?= admin_csrf_field() ?>
         <input type="hidden" name="id" value="<?= admin_h($row["id"]) ?>">

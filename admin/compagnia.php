@@ -160,18 +160,29 @@ ob_start();
 <?php if (!$people) { ?>
   <p class="admin-empty">Nessun profilo. Aggiungi la prima persona.</p>
 <?php } ?>
-<?php foreach ($people as $person) { ?>
+<?php foreach ($people as $person) {
+    $thumb = data_asset($person["fotoThumb"] ?: ($person["foto"] ?? ""));
+    $detailHref = "persona.php?id=" . rawurlencode((string) $person["id"]);
+    ?>
   <article class="admin-item">
-    <div>
-      <h2>
-        <?= admin_h($person["nome"] ?? $person["id"]) ?>
-        <?php if (!empty($person["hidden"])) { ?><span class="admin-badge">Nascosto</span><?php } ?>
-        <?php if (!data_person_is_active($person)) { ?><span class="admin-badge">Passato</span><?php } ?>
-      </h2>
-      <p><?= admin_h(implode(" · ", data_role_labels($person["ruoli"] ?? []))) ?> · <?= admin_h(data_person_period($person) ?: "periodo non indicato") ?></p>
+    <div class="admin-item__main">
+      <a class="admin-item__photo" href="<?= admin_h($detailHref) ?>">
+        <?php if ($thumb) { ?>
+          <img src="../<?= admin_h($thumb) ?>" alt="">
+        <?php } else { ?>
+          <span class="admin-item__photo-empty" aria-hidden="true"></span>
+        <?php } ?>
+      </a>
+      <div class="admin-item__body">
+        <h2>
+          <a href="<?= admin_h($detailHref) ?>"><?= admin_h($person["nome"] ?? $person["id"]) ?></a>
+          <?php if (!empty($person["hidden"])) { ?><span class="admin-badge">Nascosto</span><?php } ?>
+          <?php if (!data_person_is_active($person)) { ?><span class="admin-badge">Passato</span><?php } ?>
+        </h2>
+        <p><?= admin_h(implode(" · ", data_role_labels($person["ruoli"] ?? []))) ?> · <?= admin_h(data_person_period($person) ?: "periodo non indicato") ?></p>
+      </div>
     </div>
     <div class="admin-item__actions">
-      <a class="admin-btn-ghost" href="persona.php?id=<?= admin_h($person["id"]) ?>">Modifica</a>
       <form method="post">
         <?= admin_csrf_field() ?>
         <input type="hidden" name="id" value="<?= admin_h($person["id"]) ?>">

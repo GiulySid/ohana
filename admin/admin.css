@@ -162,8 +162,37 @@ button, input, textarea, select { font: inherit; color: inherit; }
 
 .admin-badge { color: var(--red); font-size: 0.72rem; letter-spacing: 0.08em; text-transform: uppercase; margin-left: 0.5rem; }
 .admin-item h2 { font-family: var(--display); text-transform: uppercase; font-size: 1.2rem; }
+.admin-item h2 a:hover { color: var(--red); }
 .admin-item p { color: var(--muted); font-size: 0.9rem; }
-.admin-item__actions { display: flex; gap: 0.5rem; flex-wrap: wrap; }
+.admin-item__main {
+  display: flex;
+  align-items: center;
+  gap: 0.9rem;
+  min-width: 0;
+  flex: 1 1 auto;
+}
+.admin-item__body { min-width: 0; }
+.admin-item__photo {
+  flex: 0 0 auto;
+  width: 3.2rem;
+  height: 4rem;
+  background: #161616;
+  border: 1px solid var(--line);
+  overflow: hidden;
+}
+.admin-item__photo img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.admin-item__photo-empty {
+  display: block;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(145deg, #1a1a1a, #101010);
+}
+.admin-item__actions { display: flex; gap: 0.5rem; flex-wrap: wrap; flex: 0 0 auto; }
 
 .admin-form { display: grid; gap: 1rem; }
 .admin-field { display: grid; gap: 0.4rem; }

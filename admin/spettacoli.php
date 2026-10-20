@@ -70,18 +70,19 @@ ob_start();
 <?php if (!$shows) { ?>
   <p class="admin-empty">Nessuno spettacolo. Aggiungi il primo titolo.</p>
 <?php } ?>
-<?php foreach ($shows as $show) { ?>
+<?php foreach ($shows as $show) {
+    $detailHref = "spettacolo.php?id=" . rawurlencode((string) $show["id"]);
+    ?>
   <article class="admin-item">
-    <div>
+    <div class="admin-item__body">
       <h2>
-        <?= admin_h($show["titolo"] ?? $show["id"]) ?>
+        <a href="<?= admin_h($detailHref) ?>"><?= admin_h($show["titolo"] ?? $show["id"]) ?></a>
         <?php if (!empty($show["hidden"])) { ?><span class="admin-badge">Nascosto</span><?php } ?>
         <?php if (($show["stato"] ?? "") === "prossimo") { ?><span class="admin-badge">In cartellone</span><?php } ?>
       </h2>
       <p><?= admin_h(($show["stagione"] ?: (string) ($show["anno"] ?? "")) . " · " . count($show["repliche"] ?? []) . " date") ?></p>
     </div>
     <div class="admin-item__actions">
-      <a class="admin-btn-ghost" href="spettacolo.php?id=<?= admin_h($show["id"]) ?>">Modifica</a>
       <form method="post">
         <?= admin_csrf_field() ?>
         <input type="hidden" name="id" value="<?= admin_h($show["id"]) ?>">
